@@ -4,20 +4,20 @@ const pool = require('./dbConn');
 
 pool.query(`CREATE TABLE IF NOT EXISTS creature (
     id SERIAL PRIMARY KEY NOT NULL,
-    name VARCHAR(50) NOT NULL,
-    ac integer,
-    hp integer,
-    stre integer,
-    dex integer,
-    cons integer,
-    intel integer,
-    wis integer,
-    charisma integer,
-    chal integer,
+    name text NOT NULL,
+    ac INTEGER,
+    hp INTEGER,
+    stre INTEGER,
+    dex INTEGER,
+    cons INTEGER,
+    intel INTEGER,
+    wis INTEGER,
+    charisma INTEGER,
+    chal INTEGER,
     attack  text,
     special text,
     description text,
-    mon_img)`, (err, data) => {
+    mon_img text)`, (err, data) => {
         if (err){
             console.log("CREATE TABLE creature failed");
         }else{
