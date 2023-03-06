@@ -10,7 +10,7 @@ pool.query(`INSERT INTO creature (name, ac, hp, stre, dex, cons, intel, wis, cha
             if(err){
                 console.log("Insert failed");
             }else{
-                console.log(results);
+                console.log(data);
             }
         });
 
