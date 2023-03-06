@@ -3,10 +3,10 @@
   "type": "commonjs",
   "version": "1.0.0",
   "description": "Refactor for Deployment",
-  "main": "server.js",
+  "main": "/server-side/server.js",
   "scripts": {
-    "start": "node server.js",
-    "dev": "nodemon server.js",
+    "start": "node /server-side/erver.js",
+    "dev": "nodemon /server-side/server.js",
     "migrate": "node /server-side/migrate.js",
     "seed": "node /server-side/seed.js"
   },
