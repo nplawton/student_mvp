@@ -18,13 +18,15 @@ const pool = require('./dbConn');
 
 
 app.get('/creature', (req, res, next) => {
-    if(err){
-        return next(err);
-    }
-
-    let row = results.rows;
-    console.log(row);
-    res.send(row);
+    pool.query('SELECT * FROM creature', (err, results) => {
+        if(err){
+            return next(err);
+        }
+    
+        let row = results.rows;
+        console.log(row);
+        res.send(row);
+    })
 });
 
 //Port Listeaning
