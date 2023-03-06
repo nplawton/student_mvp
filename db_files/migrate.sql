@@ -7,10 +7,8 @@ CREATE TABLE type (
 CREATE TABLE creature(
     id SERIAL PRIMARY KEY NOT NULL,
     name VARCHAR(50) NOT NULL,
-    alignment VARCHAR(50),
     hp integer,
     xp integer,
-    speed text,
     attack  text,
     special text,
     description text,
