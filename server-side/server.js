@@ -22,6 +22,14 @@ app.listen(port, () => {
     console.log('connecting to postgres pool:', pool);
 });
 
+app.get('/creature', (req, res, next) => {
+    if(err){
+        return next(err);
+    }
 
+    let row = results.rows;
+    console.log(row);
+    res.send(row);
+});
 
 console.log('hi');
