@@ -16,11 +16,6 @@ app.use(cors());
 
 const pool = require('./dbConn');
 
-//Port Listeaning
-app.listen(port, () => {
-    console.log(`listening on ${port}`);
-    console.log('connecting to postgres pool:', pool);
-});
 
 app.get('/creature', (req, res, next) => {
     if(err){
@@ -32,4 +27,8 @@ app.get('/creature', (req, res, next) => {
     res.send(row);
 });
 
-console.log('hi');
+//Port Listeaning
+app.listen(port, () => {
+    console.log(`listening on ${port}`);
+    console.log('connecting to postgres pool:', pool);
+});
