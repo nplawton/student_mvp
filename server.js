@@ -9,12 +9,19 @@ const body = require('body-parser');
 //port that express will listean to for requests
 const port = process.env.port || 8000;
 
+//Port Listeaning
+app.listen(port, () => {
+    console.log(`listening on ${port}`);
+    console.log('connecting to postgres pool:', pool);
+});
+
 //using dependcies
 const app = ex();
 app.use(body.json());
 app.use(cors());
 
 const pool = require('./dbConn');
+const e = require('express');
 
 
 app.get('/creature', (req, res, next) => {
@@ -38,8 +45,13 @@ app.get('/creature/:id', (req, res, next) => {
         res.status(404).send(`There is no creature with id ${id}`);
     }
 
-    pool.query(`SELECT name, ac, hp, stre, dex, cons, intel, wis, charisma, chal, attack, special, description, mon_img FROM creature WHERE id = $1`, 
+    pool.query(`SELECT name, attack, special, description FROM creature WHERE id = $1`, 
     [id], (err, results) => {
+        
+        if(err){
+            return next(err);
+        }
+
         const creature = results.rows[0];
         console.log('Single Creature found', creature);
 
@@ -88,8 +100,10 @@ app.post('/creature', (req, res, next) => {
 
 });
 
-//Port Listeaning
-app.listen(port, () => {
-    console.log(`listening on ${port}`);
-    console.log('connecting to postgres pool:', pool);
+app.use((err, req, res, next) => {
+    console.error('We\'re not here right now');
+    console.error(err.slack);
+    req.sendStatus(404);
 });
+
+module.exports = app;
