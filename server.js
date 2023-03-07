@@ -56,7 +56,7 @@ app.get('/creature/:id', (req, res, next) => {
     });
 });
 
-app.post('/api/creature', (req, res, next) => {
+app.post('/creature', (req, res, next) => {
 
     const name = req.body.name;
     const ac = Number.parseInt(req.body.ac);
@@ -102,7 +102,7 @@ app.post('/api/creature', (req, res, next) => {
 //Delete a creature
 app.delete("/creature/:id", (req, res, next) => {
     
-    const id = Number.parseInt(req.param.id);
+    const id = req.params.id;
     console.log(id);
     res.send('mi id is:', id);
     if(!Number.isInteger(id)){
