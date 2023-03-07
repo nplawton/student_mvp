@@ -78,7 +78,7 @@ app.post('/creature', (req, res, next) => {
     //console.log(`${name} will attack ${attack} and ${special} and looks ${description}`);
     //console.log(`${name} image located at ${mon_img}`);
 
-    if(name && armor && health && stre && dex && cons){
+    if(name && !Number.isNaN(armor) && !Number.isNaN(health) && !Number.isNaN(stre) && !Number.isNaN(dex) && !Number.isNaN(cons)){
         pool.query(`INSERT INTO creature (name, armor, health, stre, dex, cons) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *`, [name, armor, health, stre, dex, cons], (err, data) => {
             const newCreature = data.rows[0];
             console.log("Creature created", newCreature);
