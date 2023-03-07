@@ -57,6 +57,7 @@ app.get('/creature/:id', (req, res, next) => {
 });
 
 app.post('/api/creature', (req, res, next) => {
+
     const name = req.body.name;
     const ac = Number.parseInt(req.body.ac);
     const hp = Number.parseInt(req.body.hp);
@@ -77,7 +78,7 @@ app.post('/api/creature', (req, res, next) => {
     //console.log(`${name} will attack ${attack} and ${special} and looks ${description}`);
     //console.log(`${name} image located at ${mon_img}`);
 
-    if(name && !Number.isNaN(ac) && !Number.isNaN(hp) && !Number.isNaN(stre) && !Number.isNaN(dex) && !Number.isNaN(cons) && !Number.isNaN(intel) && !Number.isNaN(wis) && !Number.isNaN(charisma) && !Number.isNaN(chal) && attack && special && description && mon_img){
+    if(name){
         pool.query(`INSERT INTO creature (name, ac, hp, stre, dex, cons, intel, wis, charisma, chal, attack, special, description, mon_img) VALUES ($1, $2, $3, $4, $5, $5, $6, $7. $8, $9, $10, $11, $12, $13,$14) RETURNING *`,
         [name, ac, hp, stre, dex, cons, intel, wis, charisma, chal, attack, special, description, mon_img],
         (err, data) => {
@@ -103,7 +104,7 @@ app.delete("/creature/:id", (req, res, next) => {
     
     const id = Number.parseInt(req.param.id);
     console.log(id);
-    res.send(id);
+    res.send('mi id is:', id);
     if(!Number.isInteger(id)){
         return res.status(404).send('No creature with that ID')
     }
