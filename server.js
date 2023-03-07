@@ -96,6 +96,82 @@ app.post('/creature', (req, res, next) => {
 
 });
 
+//update a creature with Patch request
+app.patch('/creature/:id', (req, res, next) => {
+    const id = req.params.id;
+    console.log(id);
+
+    //get the change/update information from the request body
+    const name = req.body.name;
+    const armor = req.body.armor;
+    const health = req.body.health;
+    const stre = req.body.stre;
+    const dex = req.body.dex;
+    const cons = req.body.cons;
+    const intel = req.body.intel;
+    const wis = req.body.wis;
+    const charisma = req.body.charisma;
+    const chal = req.body.chal;
+    const attack = req.body.attack;
+    const special = req.body.special;
+    const description = req.body.description;
+    const mon_img = req.body.mon_img;
+
+    if(!Number.isInteger(id)){
+        res.status(404).send(`No creature with the id ${id}`);
+    }
+
+    pool.query(`SELECT * FROM creature WHERE id = $1`, [id], (err,results) => {
+        if(err){
+            return next(err);
+        }
+
+        //make sure update/change information is still accessable
+        console.log('Information to Change/Update', req.body);
+
+        const creature = results.rows[0];
+
+        //the object entity can't go into the back tick string
+        console.log(`Single PET ID from database, ${id}, with values:`, creature);
+
+        if(!creature){
+            return res.status(404).send("No creature, please check the id an try again");
+        }else{
+
+            //List all columns in the database table there is not limit to the $s
+            const updatedName = name || creature.name;
+            const updatedArmor = armor || creature.armor;
+            const updatedHealth = health || creature.health;
+            const updatedStre = stre || creature.stre;
+            const updatedDex = dex || creature.dex;
+            const updatedCons = cons || creature.cons;
+            const updatedIntel = intel || creature.intel;
+            const updatedWis = wis || creature.wis;
+            const updatedCharisma = charisma || creature.charisma;
+            const updatedChal = chal || creature.chal;
+            const updatedAttack = attack || creature.attack;
+            const updatedSpecial = special || creature.special;
+            const updatedDescription = description || creature.description;
+            const updatedMon_img = mon_img || creature.mon_img;
+
+            pool.query('UPDATE creature SET name = $1, armor = $2, health = $3, stre = $4 dex = $5, cons = $6, intel = $7, wis = $8, charisma = $9, chal = $10, attack = $11, special = $12, description = $13, mon_img = $14 WHERE id = $15 RETURNING *',
+                    [updatedName, updatedArmor, updatedHealth, updatedStre, updatedDex, updatedCons, updatedIntel, updatedWis, updatedCharisma, updatedChal, updatedAttack, updatedSpecial, updatedDescription, updatedMon_img, id], (err, data) => {
+
+                        if(err){
+                            return next(err);
+                        }
+
+                        const updatedCreature = data.rows[0];
+                        console.log('Updated create values');
+                        return res.send(updatedCreature);
+            });
+
+        }
+
+    });
+
+})
+
 
 //Delete a creature
 app.delete("/creature/:id", (req, res, next) => {
