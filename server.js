@@ -15,7 +15,6 @@ app.use(body.json());
 app.use(cors());
 
 const pool = require('./dbConn');
-const e = require('express');
 
 
 app.get('/creature', (req, res, next) => {
@@ -100,31 +99,31 @@ app.post('/api/creature', (req, res, next) => {
 
 
 //Delete a creature
-app.delete('/api/creature/:id', (res, req, next) => {
+app.delete(`/api/creature/:id`, (res, req, next) => {
     
     const id = Number.parseInt(req.param.id);
     console.log(id);
-
+    res.send(id);
     if(!Number.isInteger(id)){
         return res.status(404).send('No creature with that ID')
     }
 
-    pool.query('DELETE FROM creature WHERE id = $1 RETURNING *', [id], (err, data) => {
-        if(err){
-            return next(err);
-        }
+    // pool.query('DELETE FROM creature WHERE id = $1 RETURNING *', [id], (err, data) => {
+    //     if(err){
+    //         return next(err);
+    //     }
 
-        const deleteCreature = data.rows[0];
-        console.log(deleteCreature);
+    //     const deleteCreature = data.rows[0];
+    //     console.log(deleteCreature);
 
-        if(deleteCreature){
-            //respond with deleted row/creature
-            res.send(deleteCreature);
-        }else{
-            res.status(404).send('No creature was found with that ID');
-        }
+    //     if(deleteCreature){
+    //         //respond with deleted row/creature
+    //         res.send(deleteCreature);
+    //     }else{
+    //         res.status(404).send('No creature was found with that ID');
+    //     }
 
-    });
+    // });
 
 });
 
