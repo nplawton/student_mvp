@@ -102,9 +102,9 @@ app.post('/creature', (req, res, next) => {
 //Delete a creature
 app.delete("/creature/:id", (req, res, next) => {
     
-    const id = req.params.id;
+    const id = Number.parseInt(req.params.id);
     console.log(id);
-    res.send('mi id is:', id);
+    res.send('my id is:', id);
     if(!Number.isInteger(id)){
         return res.status(404).send('No creature with that ID')
     }
