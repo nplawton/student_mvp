@@ -99,7 +99,7 @@ app.post('/creature', (req, res, next) => {
 //update a creature with Patch request
 app.patch('/creature/:id', (req, res, next) => {
     const id = Number.parseInt(req.params.id);
-    console.log(id);
+    //console.log(id);
 
     //get the change/update information from the request body
     const name = req.body.name;
@@ -117,9 +117,9 @@ app.patch('/creature/:id', (req, res, next) => {
     const description = req.body.description;
     const mon_img = req.body.mon_img;
 
-    if(!Number.isInteger(id)){
-        res.status(404).send(`No creature with the id ${id}`);
-    }
+    // if(!Number.isInteger(id)){
+    //     res.status(404).send(`No creature with the id ${id}`);
+    // }
 
     pool.query('SELECT * FROM creature WHERE id = $1', [id], (err,results) => {
         if(err){
@@ -127,12 +127,12 @@ app.patch('/creature/:id', (req, res, next) => {
         }
 
         //make sure update/change information is still accessable
-        console.log('Information to Change/Update', req.body);
+        //console.log('Information to Change/Update', req.body);
 
         const creature = results.rows[0];
 
         //the object entity can't go into the back tick string
-        console.log(`Single PET ID from database, ${id}, with values:`, creature);
+        //console.log(`Single PET ID from database, ${id}, with values:`, creature);
 
         if(!creature){
             return res.status(404).send("No creature, please check the id an try again");
@@ -162,7 +162,7 @@ app.patch('/creature/:id', (req, res, next) => {
                         }
 
                         const updatedCreature = data.rows[0];
-                        console.log('Updated create values');
+                        //console.log('Updated create values');
                         return res.send(updatedCreature);
             });
 
