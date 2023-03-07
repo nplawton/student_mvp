@@ -100,13 +100,13 @@ app.post('/creature', (req, res, next) => {
 
 
 //Delete a creature
-app.delete('/pets/:id', (res, req, next) => {
+app.delete("/pets/:id", (res, req, next) => {
     
     const id = Number.parseInt(req.param.id);
     console.log(id);
 
     if(!Number.isInteger(id)){
-        return res.status(404).send('No creature with the ID: ', id)
+        return res.status(404).send('No creature with that ID')
     }
 
     pool.query('DELETE FROM creature WHERE id = $1 RETURNING *', [id], (err, data) => {
@@ -121,7 +121,7 @@ app.delete('/pets/:id', (res, req, next) => {
             //respond with deleted row/creature
             res.send(deleteCreature);
         }else{
-            res.status(404).send('No creature was found with ID: ', id);
+            res.status(404).send('No creature was found with that ID');
         }
 
     });
