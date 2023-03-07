@@ -29,7 +29,7 @@ app.get('/creature', (req, res, next) => {
     })
 });
 
-app.post('/creature', (res, res, next) => {
+app.post('/creature', (req, res, next) => {
     const { name, attack, special, description, mon_imag } = req.body;
     const ac = Number.parseInt(req.body.ac);
     const hp = Number.parseInt(req.body.hp);
