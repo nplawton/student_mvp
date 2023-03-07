@@ -58,7 +58,7 @@ app.get('/creature/:id', (req, res, next) => {
 });
 
 app.post('/creature', (req, res, next) => {
-    const { name, attack, special, description, mon_img } = req.body;
+    const name = req.body.name;
     const ac = Number.parseInt(req.body.ac);
     const hp = Number.parseInt(req.body.hp);
     const stre = Number.parseInt(req.body.stre);
@@ -68,6 +68,10 @@ app.post('/creature', (req, res, next) => {
     const wis = Number.parseInt(req.body.wis);
     const charisma = Number.parseInt(req.body.charisma);
     const chal = Number.parseInt(req.body.ac);
+    const attack = req.body.attack;
+    const special = req.body.special;
+    const description = req.body.description;
+    const mon_img = req.body.mon_img;
 
     //console.log(`new creature ${name}, has an ac of ${ac} with ${hp} health and challenge of ${chal}`);
     //console.log(`${name}, base stat is str ${stre}, dex ${dex}, consti ${cons}, intel ${intel}, charisma ${charisma}`);
