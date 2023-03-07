@@ -98,7 +98,7 @@ app.post('/creature', (req, res, next) => {
 
 //update a creature with Patch request
 app.patch('/creature/:id', (req, res, next) => {
-    const id = req.params.id;
+    const id = Number.parseInt(req.params.id);
     console.log(id);
 
     //get the change/update information from the request body
@@ -121,7 +121,7 @@ app.patch('/creature/:id', (req, res, next) => {
         res.status(404).send(`No creature with the id ${id}`);
     }
 
-    pool.query(`SELECT * FROM creature WHERE id = $1`, [id], (err,results) => {
+    pool.query('SELECT * FROM creature WHERE id = $1', [id], (err,results) => {
         if(err){
             return next(err);
         }
