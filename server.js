@@ -99,7 +99,7 @@ app.post('/api/creature', (req, res, next) => {
 
 
 //Delete a creature
-app.delete(`/creature/:id`, (res, req, next) => {
+app.delete("/creature/:id", (req, res, next) => {
     
     const id = Number.parseInt(req.param.id);
     console.log(id);
