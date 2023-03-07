@@ -59,8 +59,8 @@ app.get('/creature/:id', (req, res, next) => {
 app.post('/creature', (req, res, next) => {
 
     const name = req.body.name;
-    const ac = Number.parseInt(req.body.armor);
-    const hp = Number.parseInt(req.body.health);
+    const ac = req.body.ac;
+    const hp = req.body.hp;
     const stre = Number.parseInt(req.body.stre);
     const dex = Number.parseInt(req.body.dex);
     const cons = Number.parseInt(req.body.cons);
