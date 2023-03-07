@@ -29,8 +29,30 @@ app.get('/creature', (req, res, next) => {
     })
 });
 
+app.get('/creature/:id', (req, res, next) => {
+    const id = Number.parseInt(req.params.id);
+    console.log(id);
+
+    //If ID is not a number return error
+    if(!Number.parseInt(id)){
+        res.status(404).send(`There is no creature with id ${id}`);
+    }
+
+    pool.query(`SELECT name, ac, hp, stre, dex, cons, intel, wis, charisma, chal, attack, special, description, mon_img FROM creature WHERE id = $1`, 
+    [id], (err, results) => {
+        const creature = results.rows[0];
+        console.log('Single Creature found', creature);
+
+        if(creature){
+            return res.send(creature);
+        }else{
+            return res.status(404).send('No creature was found');
+        }
+    });
+});
+
 app.post('/creature', (req, res, next) => {
-    const { name, attack, special, description, mon_imag } = req.body;
+    const { name, attack, special, description, mon_img } = req.body;
     const ac = Number.parseInt(req.body.ac);
     const hp = Number.parseInt(req.body.hp);
     const stre = Number.parseInt(req.body.stre);
@@ -41,10 +63,28 @@ app.post('/creature', (req, res, next) => {
     const charisma = Number.parseInt(req.body.charisma);
     const chal = Number.parseInt(req.body.ac);
 
-    console.log(`new creature ${name}, has an ac of ${ac} with ${hp} health and challenge of ${chal}`);
-    console.log(`${name}, base stat is str ${stre}, dex ${dex}, consti ${cons}, intel ${intel}, charisma ${charisma}`);
-    console.log(`${name} will attack ${attack} and ${special} and looks ${description}`);
-    console.log(`${name} image located at ${mon_imag}`);
+    //console.log(`new creature ${name}, has an ac of ${ac} with ${hp} health and challenge of ${chal}`);
+    //console.log(`${name}, base stat is str ${stre}, dex ${dex}, consti ${cons}, intel ${intel}, charisma ${charisma}`);
+    //console.log(`${name} will attack ${attack} and ${special} and looks ${description}`);
+    //console.log(`${name} image located at ${mon_img}`);
+
+    if(name && !Number.isNaN(ac) && !Number.isNaN(hp) && !Number.isNaN(stre) && !Number.isNaN(dex) && !Number.isNaN(cons) && !Number.isNaN(intel) && !Number.isNaN(wis) && !Number.isNaN(charisma) && !Number.isNaN(chal) && attack && special && description && mon_imag){
+        pool.query(`INSERT INTO creature (name, ac, hp, stre, dex, cons, intel, wis, charisma, chal, attack, special, description, mon_img) VALUES ($1, $2, $3, $4, $5, $5, $6, $7. $8, $9, $10, $11, $12, $13,$14) RETURNING *`,
+        [name, ac, hp, stre, dex, cons, intel, wis, charisma, chal, attack, special, description, mon_img],
+        (err, data) => {
+            const newCreature = data.rows[0];
+            console.log("Creature created", newCreature);
+
+            if(newCreature){
+                return res.send(newCreature);
+            }else{
+                return next(err);
+            }
+        });
+    }else{
+        return res.status(400).send('Creature entry information missing. pleas update and try again');
+    }
+
 
 });
 
