@@ -39,7 +39,7 @@ app.get('/creature/:id', (req, res, next) => {
         res.status(404).send(`There is no creature with id ${id}`);
     }
 
-    pool.query(`SELECT name, attack, special, description FROM creature WHERE id = $1`, 
+    pool.query(`SELECT id, name, attack, special, description FROM creature WHERE id = $1`, 
     [id], (err, results) => {
         
         if(err){
