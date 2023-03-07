@@ -92,7 +92,7 @@ app.post('/creature', (req, res, next) => {
             }
         });
     }else{
-        return res.status(400).send('Creature entry information missing. pleas update and try again');
+        return res.status(400).send('Creature entry information missing. Please update and try again');
     }
 
 
