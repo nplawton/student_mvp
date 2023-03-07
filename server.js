@@ -154,7 +154,7 @@ app.patch('/creature/:id', (req, res, next) => {
             const updatedDescription = description || creature.description;
             const updatedMon_img = mon_img || creature.mon_img;
 
-            pool.query('UPDATE creature SET name = $1, armor = $2, health = $3, stre = $4 dex = $5, cons = $6, intel = $7, wis = $8, charisma = $9, chal = $10, attack = $11, special = $12, description = $13, mon_img = $14 WHERE id = $15 RETURNING *',
+            pool.query('UPDATE creature SET name = $1, armor = $2, health = $3, stre = $4, dex = $5, cons = $6, intel = $7, wis = $8, charisma = $9, chal = $10, attack = $11, special = $12, description = $13, mon_img = $14 WHERE id = $15 RETURNING *',
                     [updatedName, updatedArmor, updatedHealth, updatedStre, updatedDex, updatedCons, updatedIntel, updatedWis, updatedCharisma, updatedChal, updatedAttack, updatedSpecial, updatedDescription, updatedMon_img, id], (err, data) => {
 
                         if(err){
