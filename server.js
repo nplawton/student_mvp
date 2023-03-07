@@ -18,7 +18,7 @@ const pool = require('./dbConn');
 const e = require('express');
 
 
-app.get('/api/creature', (req, res, next) => {
+app.get('/creature', (req, res, next) => {
     pool.query('SELECT * FROM creature', (err, results) => {
         if(err){
             return next(err);
@@ -30,7 +30,7 @@ app.get('/api/creature', (req, res, next) => {
     })
 });
 
-app.get('/api/creature/:id', (req, res, next) => {
+app.get('/creature/:id', (req, res, next) => {
     const id = Number.parseInt(req.params.id);
     console.log(id);
 
