@@ -79,7 +79,7 @@ app.post('/creature', (req, res, next) => {
     //console.log(`${name} image located at ${mon_img}`);
 
     if(name && !Number.isNaN(armor) && !Number.isNaN(health) && !Number.isNaN(stre) && !Number.isNaN(dex) && !Number.isNaN(cons) && !Number.isNaN(intel) && !Number.isNaN(wis) && !Number.isNaN(charisma) && !Number.isNaN(chal)){
-        pool.query(`INSERT INTO creature (name, armor, health, stre, dex, cons) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *`, [name, armor, health, stre, dex, cons, intel, wis, charisma, chal], (err, data) => {
+        pool.query(`INSERT INTO creature (name, armor, health, stre, dex, cons, intel, wis, charisma, chal) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *`, [name, armor, health, stre, dex, cons, intel, wis, charisma, chal], (err, data) => {
             const newCreature = data.rows[0];
             console.log("Creature created", newCreature);
 
