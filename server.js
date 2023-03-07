@@ -18,7 +18,7 @@ const pool = require('./dbConn');
 const e = require('express');
 
 
-app.get('/creature', (req, res, next) => {
+app.get('/api/creature', (req, res, next) => {
     pool.query('SELECT * FROM creature', (err, results) => {
         if(err){
             return next(err);
@@ -30,7 +30,7 @@ app.get('/creature', (req, res, next) => {
     })
 });
 
-app.get('/creature/:id', (req, res, next) => {
+app.get('/api/creature/:id', (req, res, next) => {
     const id = Number.parseInt(req.params.id);
     console.log(id);
 
@@ -57,7 +57,7 @@ app.get('/creature/:id', (req, res, next) => {
     });
 });
 
-app.post('/creature', (req, res, next) => {
+app.post('/api/creature', (req, res, next) => {
     const name = req.body.name;
     const ac = Number.parseInt(req.body.ac);
     const hp = Number.parseInt(req.body.hp);
@@ -100,7 +100,7 @@ app.post('/creature', (req, res, next) => {
 
 
 //Delete a creature
-app.delete("/creature/:id", (res, req, next) => {
+app.delete("/api/creature/:id", (res, req, next) => {
     
     const id = Number.parseInt(req.param.id);
     console.log(id);
