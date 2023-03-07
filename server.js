@@ -98,7 +98,7 @@ app.post('/creature', (req, res, next) => {
 
 //update a creature with Patch request
 app.patch('/creature/:id', (req, res, next) => {
-    const id = Number.parseInt(req.params.id);
+    const id = req.params.id;
     //console.log(id);
 
     //get the change/update information from the request body
