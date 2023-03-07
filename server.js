@@ -62,8 +62,8 @@ app.post('/creature', (req, res, next) => {
     const armor = req.body.armor;
     const health = req.body.health;
     const stre = req.body.stre;
-    const dex = Number.parseInt(req.body.dex);
-    const cons = Number.parseInt(req.body.cons);
+    const dex = req.body.dex;
+    const cons = req.body.cons;
     const intel = Number.parseInt(req.body.intel);
     const wis = Number.parseInt(req.body.wis);
     const charisma = Number.parseInt(req.body.charisma);
@@ -78,8 +78,8 @@ app.post('/creature', (req, res, next) => {
     //console.log(`${name} will attack ${attack} and ${special} and looks ${description}`);
     //console.log(`${name} image located at ${mon_img}`);
 
-    if(name && armor && health){
-        pool.query(`INSERT INTO creature (name, armor, health) VALUES ($1, $2, $3) RETURNING *`, [name, armor, health], (err, data) => {
+    if(name && armor && health && stre && dex && cons){
+        pool.query(`INSERT INTO creature (name, armor, health, stre, dex, cons) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *`, [name, armor, health, stre, dex, cons], (err, data) => {
             const newCreature = data.rows[0];
             console.log("Creature created", newCreature);
 
