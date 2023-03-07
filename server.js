@@ -79,9 +79,7 @@ app.post('/creature', (req, res, next) => {
     //console.log(`${name} image located at ${mon_img}`);
 
     if(name && armor && health){
-        pool.query(`INSERT INTO creature (name) VALUES ($1, $2, $3) RETURNING *`,
-        [name, armor, health],
-        (err, data) => {
+        pool.query(`INSERT INTO creature (name, armor, health) VALUES ($1, $2, $3) RETURNING *`, [name, armor, health], (err, data) => {
             const newCreature = data.rows[0];
             console.log("Creature created", newCreature);
 
