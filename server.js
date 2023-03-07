@@ -78,7 +78,7 @@ app.post('/creature', (req, res, next) => {
     //console.log(`${name} will attack ${attack} and ${special} and looks ${description}`);
     //console.log(`${name} image located at ${mon_img}`);
 
-    if(name && !Number.isNaN(ac) && !Number.isNaN(hp)){
+    if(name && ac && hp){
         pool.query(`INSERT INTO creature (name) VALUES ($1, $2, $3) RETURNING *`,
         [name, ac, hp],
         (err, data) => {
