@@ -9,12 +9,6 @@ const body = require('body-parser');
 //port that express will listean to for requests
 const port = process.env.port || 8000;
 
-//Port Listeaning
-app.listen(port, () => {
-    console.log(`listening on ${port}`);
-    console.log('connecting to postgres pool:', pool);
-});
-
 //using dependcies
 const app = ex();
 app.use(body.json());
@@ -99,6 +93,13 @@ app.post('/creature', (req, res, next) => {
 
 
 });
+
+//Port Listeaning
+app.listen(port, () => {
+    console.log(`listening on ${port}`);
+    console.log('connecting to postgres pool:', pool);
+});
+
 
 app.use((err, req, res, next) => {
     console.error('We\'re not here right now');
