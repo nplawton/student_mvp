@@ -78,9 +78,9 @@ app.post('/creature', (req, res, next) => {
     //console.log(`${name} will attack ${attack} and ${special} and looks ${description}`);
     //console.log(`${name} image located at ${mon_img}`);
 
-    //if(name){
-        pool.query(`INSERT INTO creature (name, ac, hp, stre, dex, cons, intel, wis, charisma, chal, attack, special, description, mon_img) VALUES ($1, $2, $3, $4, $5, $5, $6, $7. $8, $9, $10, $11, $12, $13,$14) RETURNING *`,
-        [name, ac, hp, stre, dex, cons, intel, wis, charisma, chal, attack, special, description, mon_img],
+    if(name){
+        pool.query(`INSERT INTO creature (name) VALUES ($1) RETURNING *`,
+        [name],
         (err, data) => {
             const newCreature = data.rows[0];
             console.log("Creature created", newCreature);
@@ -91,9 +91,9 @@ app.post('/creature', (req, res, next) => {
                 return next(err);
             }
         });
-    // }else{
-    //     return res.status(400).send('Creature entry information missing. pleas update and try again');
-    // }
+    }else{
+        return res.status(400).send('Creature entry information missing. pleas update and try again');
+    }
 
 
 });
@@ -104,28 +104,27 @@ app.delete("/creature/:id", (req, res, next) => {
     
     const id = Number.parseInt(req.params.id);
     console.log(id);
-    res.send('my id is:', id);
-    
+
     if(!Number.isInteger(id)){
         return res.status(404).send('No creature with that ID')
     }
 
-    // pool.query('DELETE FROM creature WHERE id = $1 RETURNING *', [id], (err, data) => {
-    //     if(err){
-    //         return next(err);
-    //     }
+    pool.query('DELETE FROM creature WHERE id = $1 RETURNING *', [id], (err, results) => {
+        if(err){
+            return next(err);
+        }
 
-    //     const deleteCreature = data.rows[0];
-    //     console.log(deleteCreature);
+        const creature = results.rows[0];
+        console.log(creature);
 
-    //     if(deleteCreature){
-    //         //respond with deleted row/creature
-    //         res.send(deleteCreature);
-    //     }else{
-    //         res.status(404).send('No creature was found with that ID');
-    //     }
+        if(creature){
+            //respond with deleted row/creature
+            res.send(creature);
+        }else{
+            res.status(404).send('No creature was found with that ID');
+        }
 
-    // });
+    });
 
 });
 
