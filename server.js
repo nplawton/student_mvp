@@ -98,6 +98,36 @@ app.post('/creature', (req, res, next) => {
 
 });
 
+
+//Delete a creature
+app.delete('/pets/:id', (res, req, next) => {
+    
+    const id = Number.parseInt(req.param.id);
+    console.log(id);
+
+    if(!Number.isInteger(id)){
+        return res.status(404).send('No creature with the ID: ', id)
+    }
+
+    pool.query('DELETE FROM creature WHERE id = $1 RETURNING *', [id], (err, data) => {
+        if(err){
+            return next(err);
+        }
+
+        const deleteCreature = data.rows[0];
+        console.log(deleteCreature);
+
+        if(deleteCreature){
+            //respond with deleted row/creature
+            res.send(deleteCreature);
+        }else{
+            res.status(404).send('No creature was found with ID: ', id);
+        }
+
+    });
+
+});
+
 //Port Listeaning
 app.listen(port, () => {
     console.log(`listening on ${port}`);
