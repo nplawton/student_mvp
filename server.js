@@ -74,7 +74,7 @@ app.post('/creature', (req, res, next) => {
     //console.log(`${name} will attack ${attack} and ${special} and looks ${description}`);
     //console.log(`${name} image located at ${mon_img}`);
 
-    if(name && !Number.isNaN(ac) && !Number.isNaN(hp) && !Number.isNaN(stre) && !Number.isNaN(dex) && !Number.isNaN(cons) && !Number.isNaN(intel) && !Number.isNaN(wis) && !Number.isNaN(charisma) && !Number.isNaN(chal) && attack && special && description && mon_imag){
+    if(name && !Number.isNaN(ac) && !Number.isNaN(hp) && !Number.isNaN(stre) && !Number.isNaN(dex) && !Number.isNaN(cons) && !Number.isNaN(intel) && !Number.isNaN(wis) && !Number.isNaN(charisma) && !Number.isNaN(chal) && attack && special && description && mon_img){
         pool.query(`INSERT INTO creature (name, ac, hp, stre, dex, cons, intel, wis, charisma, chal, attack, special, description, mon_img) VALUES ($1, $2, $3, $4, $5, $5, $6, $7. $8, $9, $10, $11, $12, $13,$14) RETURNING *`,
         [name, ac, hp, stre, dex, cons, intel, wis, charisma, chal, attack, special, description, mon_img],
         (err, data) => {
