@@ -64,10 +64,10 @@ app.post('/creature', (req, res, next) => {
     const stre = req.body.stre;
     const dex = req.body.dex;
     const cons = req.body.cons;
-    const intel = Number.parseInt(req.body.intel);
-    const wis = Number.parseInt(req.body.wis);
-    const charisma = Number.parseInt(req.body.charisma);
-    const chal = Number.parseInt(req.body.chal);
+    const intel = req.body.intel;
+    const wis = req.body.wis;
+    const charisma = req.body.charisma;
+    const chal = req.body.chal;
     const attack = req.body.attack;
     const special = req.body.special;
     const description = req.body.description;
@@ -78,8 +78,8 @@ app.post('/creature', (req, res, next) => {
     //console.log(`${name} will attack ${attack} and ${special} and looks ${description}`);
     //console.log(`${name} image located at ${mon_img}`);
 
-    if(name && !Number.isNaN(armor) && !Number.isNaN(health) && !Number.isNaN(stre) && !Number.isNaN(dex) && !Number.isNaN(cons)){
-        pool.query(`INSERT INTO creature (name, armor, health, stre, dex, cons) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *`, [name, armor, health, stre, dex, cons], (err, data) => {
+    if(name && !Number.isNaN(armor) && !Number.isNaN(health) && !Number.isNaN(stre) && !Number.isNaN(dex) && !Number.isNaN(cons) && !Number.isNaN(intel) && !Number.isNaN(wis) && !Number.isNaN(charisma) && !Number.isNaN(chal)){
+        pool.query(`INSERT INTO creature (name, armor, health, stre, dex, cons) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *`, [name, armor, health, stre, dex, cons, intel, wis, charisma, chal], (err, data) => {
             const newCreature = data.rows[0];
             console.log("Creature created", newCreature);
 
