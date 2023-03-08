@@ -32,7 +32,17 @@ app.get('/type', (req, res, next) => {
 
 app.get('/creature', (req, res, next) => {
 
-    pool.query('SELECT name, alignment_id, type_id as type_id, health, exp, chal, descrip_id, stat_id, attack_id, spattack_id FROM creature JOIN type ON creture.type_id = type.type_id', (err, data) => {
+    pool.query(`SELECT name, 
+                c.alignment_id, 
+                t.name, t.description, 
+                c.health, c.exp, c.chal, 
+                c.descrip_id, 
+                c.stat_id, 
+                c.attack_id, 
+                c.spattack_id 
+                FROM creature c
+                JOIN type t ON c.type_id = t.type_id`, 
+    (err, data) => {
         if(err){
             console.log(err);
             return next(err);
