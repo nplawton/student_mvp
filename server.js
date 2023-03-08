@@ -34,6 +34,7 @@ app.get('/creature', (req, res, next) => {
 
     pool.query('SELECT name, alignment_id, type_id as type_id, health, exp, chal, descrip_id, stat_id, attack_id, spattack_id FROM creature JOIN type ON creture.type_id = type.type_id', (err, data) => {
         if(err){
+            console.log(err);
             return next(err);
         }
     
@@ -207,8 +208,8 @@ app.get('/creature', (req, res, next) => {
 //             const updatedAttack = attack_id || creature.attack_id;
 //             const updatedSpecial = spattack_id || creature.spattack_id;
 
-//             pool.query('UPDATE creature SET name = $1, armor = $2, health = $3, stre = $4, dex = $5, cons = $6, intel = $7, wis = $8, charisma = $9, chal = $10, attack = $11, special = $12, description = $13, mon_img = $14 WHERE id = $15 RETURNING *',
-//                     [updatedName, updatedArmor, updatedHealth, updatedStre, updatedDex, updatedCons, updatedIntel, updatedWis, updatedCharisma, updatedChal, updatedAttack, updatedSpecial, updatedDescription, updatedMon_img, id], (err, data) => {
+//             pool.query('UPDATE creature SET name = $1, alignment_id = $2, type_id = $3, health = $4, exp = $5, chal = $6, descrip_id = $7, stat_id = $8, attack_ida = $9, spattack_id = $10 WHERE id = $11 RETURNING *',
+//                     [updatedName, updatedAlignment, updatedType, updatedHealth, updatedExp, updatedChal, updatedDescrip, updatedStat, updatedAttack, updatedSpecial, id], (err, data) => {
 
 //                         if(err){
 //                             return next(err);
