@@ -19,7 +19,7 @@ pool.query(`INSERT INTO type (name, description) VALUES
         ('Vermin', 'A vermin is an invertebrate, such as an insect, arachnid, arthropod, or worm. Vermin are unintelligent and immune to mind-influencing effects. They usually have darkvision.'),
         ('Monstrous Humanoid', 'A monstrous humanoid is similar to a humanoid, but usually has monstrous or animalistic features. Many also have supernatural abilities. Monstrous humanoids usually have darkvision.'),
         ('Goblinoid', 'Goblinoids had a typical humanoid anatomy, though their skin tone and texture was often somewhere between that of a human and a snail. The notable exception of this rule was the bugbears whose entire bodies were covered head to toe in thick fur.')
-        ON CONFLICT (name) DO NOTHING`, 
+        ON CONFLICT (type_id) DO NOTHING`, 
     (err, type) => {
         if(err){
             console.log("Insert failed");
@@ -29,7 +29,7 @@ pool.query(`INSERT INTO type (name, description) VALUES
         }
 });
 
-pool.query(`INSERT INTO creature (name, alignment_id, type_id, health, exp, chal, descript_id, stat_id, attack_id, spattack_id) VALUES
+pool.query(`INSERT INTO creature (name, alignment_id, type_id, health, exp, chal, descrip_id, stat_id, attack_id, spattack_id) VALUES
         ('Aarakocra', 1, 16, 13, 50, 1/4, 1, 1, 1, 1),
         ('Aboleth', 2, 1, 135, 5900, 10, 2, 2, 2, 2),
         ('Animated Object, Armor', 4, 4, 33, 200, 1, 3, 3, 3, 3),
@@ -58,7 +58,7 @@ pool.query(`INSERT INTO creature (name, alignment_id, type_id, health, exp, chal
         ('Deva', 2, 3, 136, 5900, 10, 26, 26, 26, 26),
         ('Planetar', 2, 3, 200, 15000, 16, 27, 27, 27, 27),
         ('Solar', 2, 3, 243, 33000, 21, 28, 28, 28, 28),
-        ON CONFLICT (name) DO NOTHING`,
+        ON CONFLICT (id) DO NOTHING`,
         (err, creature) => {
             if(err){
                 console.log("Insert failed");
