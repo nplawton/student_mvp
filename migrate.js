@@ -15,7 +15,7 @@ pool.query(`DROP TABLE IF EXISTS type, creature`, (err, res) => {
 setTimeout(() => {
     pool.query(`CREATE TABLE IF NOT EXISTS type (
         type_id SERIAL PRIMARY KEY NOT NULL,
-        name VARCHAR(200) NOT NULL,
+        t_name VARCHAR(200) NOT NULL,
         description text NOT NULL)`, 
         (err, type) => {
             if (err){
@@ -30,7 +30,7 @@ setTimeout(() => {
 setTimeout(() => {
     pool.query(`CREATE TABLE IF NOT EXISTS creature (
         id SERIAL PRIMARY KEY NOT NULL,
-        name VARCHAR(200) NOT NULL,
+        c_name VARCHAR(200) NOT NULL,
         alignment_id INTEGER NOT NULL,
         type_id INTEGER NOT NULL REFERENCES type (type_id),
         health INTEGER NOT NULL,

@@ -33,9 +33,9 @@ app.get('/type', (req, res, next) => {
 app.get('/creature', (req, res, next) => {
 
     pool.query(`SELECT 
-                c.name, 
+                c.c_name, 
                 c.alignment_id, 
-                t.name, t.description, 
+                t.t_name, t.description, 
                 c.health, c.exp, c.chal, 
                 c.descrip_id, 
                 c.stat_id, 

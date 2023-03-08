@@ -1,7 +1,7 @@
 const { Pool } = require('pg');
 const pool = require('./dbConn');
 
-pool.query(`INSERT INTO type (name, description) VALUES 
+pool.query(`INSERT INTO type (t_name, description) VALUES 
         ('Aberration', 'Aberrations are alien entities, often with powers drawn from their minds. All aberrations have darkvision.'),
         ('Beast', 'Beasts are nonhumanoid creatures that are part of the natural world. Some beasts have magical powers, but are generally low in intelligence.'),
         ('Celestial', 'Celestials are creatures native to the Upper Planes, and good by nature.'), 
@@ -29,7 +29,7 @@ pool.query(`INSERT INTO type (name, description) VALUES
         }
 });
 
-pool.query(`INSERT INTO creature (name, alignment_id, type_id, health, exp, chal, descrip_id, stat_id, attack_id, spattack_id) VALUES
+pool.query(`INSERT INTO creature (c_name, alignment_id, type_id, health, exp, chal, descrip_id, stat_id, attack_id, spattack_id) VALUES
         ('Aarakocra', 1, 16, 13, 50, 0, 1, 1, 1, 1),
         ('Aboleth', 2, 1, 135, 5900, 10, 2, 2, 2, 2),
         ('Animated Object, Armor', 4, 4, 33, 200, 1, 3, 3, 3, 3),
