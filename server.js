@@ -16,6 +16,8 @@ app.use(cors());
 
 const pool = require('./dbConn');
 
+
+//Get Request for each Table. Currently Functioning: type
 app.get('/type', (req, res, next) => {
     pool.query('SELECT * FROM type', (err, results) => {
         if(err){
@@ -30,7 +32,7 @@ app.get('/type', (req, res, next) => {
 
 app.get('/creature', (req, res, next) => {
 
-    pool.query('SELECT name, alignment_id, type_id as type_id, health, exp, chal, descrip_id, stat_id, attack_id, spattack_id, FROM creature JOIN type ON creture.type_id = type.type_id', (err, data) => {
+    pool.query('SELECT name, alignment_id, type_id as type_id, health, exp, chal, descrip_id, stat_id, attack_id, spattack_id FROM creature JOIN type ON creture.type_id = type.type_id', (err, data) => {
         if(err){
             return next(err);
         }
@@ -42,6 +44,8 @@ app.get('/creature', (req, res, next) => {
 
 });
 
+
+//
 app.get('/creature/:id', (req, res, next) => {
     const id = Number.parseInt(req.params.id);
     console.log(id);
@@ -95,59 +99,59 @@ app.get('/type/:id', (req, res, next) => {
     });
 });
 
-// app.post('/creature', (req, res, next) => {
+app.post('/creature', (req, res, next) => {
 
-//     const name = req.body.name;
-//     const alignment_id = req.body.alignment_id;
-//     const type_id = req.body.type_id;
-//     const health = req.body.health;
-//     const exp = req.body.exp;
-//     const chal = req.body.chal;
-//     const descrip_id = req.body.descrip_id;
-//     const stat_id = req.body.stat_id;
-//     const attack_id = req.body.stat_id;
-//     const spattack_id = req.body.spattack_id;
+    const name = req.body.name;
+    const alignment_id = req.body.alignment_id;
+    const type_id = req.body.type_id;
+    const health = req.body.health;
+    const exp = req.body.exp;
+    const chal = req.body.chal;
+    const descrip_id = req.body.descrip_id;
+    const stat_id = req.body.stat_id;
+    const attack_id = req.body.stat_id;
+    const spattack_id = req.body.spattack_id;
 
-//     if(name && !Number.isNaN(alignment_id) && !Number.isNaN(type_id) && !Number.isNaN(health) && !Number.isNaN(exp) && !Number.isNaN(chal) && !Number.isNaN(descrip_id) && !Number.isNaN(stat_id) && !Number.isNaN(charisma) && !Number.isNaN(chal) && attack && special && description && mon_img){
-//         pool.query(`INSERT INTO creature (name, armor, health, stre, dex, cons, intel, wis, charisma, chal, attack, special, description, mon_img) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) RETURNING *`, [name, armor, health, stre, dex, cons, intel, wis, charisma, chal, attack, special, description, mon_img], (err, data) => {
-//             const newCreature = data.rows[0];
-//             console.log("Creature created", newCreature);
+    if(name && !Number.isNaN(alignment_id) && !Number.isNaN(type_id) && !Number.isNaN(health) && !Number.isNaN(exp) && !Number.isNaN(chal) && !Number.isNaN(descrip_id) && !Number.isNaN(stat_id) && !Number.isNaN(attack_id) && !Number.isNaN(spattack_id)){
+        pool.query(`INSERT INTO creature (name, type_id, health, exp, chal, descrip_id, stat_id, attack_id, spattack_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *`, [name, alignment_id, type_id, health, exp, chal, descrip_id, stat_id, attack_id, spattack_id], (err, data) => {
+            const newCreature = data.rows[0];
+            console.log("Creature created", newCreature);
 
-//             if(newCreature){
-//                 return res.send(newCreature);
-//             }else{
-//                 return next(err);
-//             }
-//         });
-//     }else{
-//         return res.status(400).send('Creature entry information missing. Please update and try again');
-//     }
-
-
-// });
-
-// app.post('/creature', (req, res, next) => {
-
-//     const name = req.body.name;
-//     const description = req.body.description;
-
-//     if(name && description ){
-//         pool.query(`INSERT INTO creature (name, description,) VALUES ($1, $2,) RETURNING *`, [name, description], (err, data) => {
-//             const newCreature = data.rows[0];
-//             console.log("Creature created", newCreature);
-
-//             if(newCreature){
-//                 return res.send(newCreature);
-//             }else{
-//                 return next(err);
-//             }
-//         });
-//     }else{
-//         return res.status(400).send('Creature entry information missing. Please update and try again');
-//     }
+            if(newCreature){
+                return res.send(newCreature);
+            }else{
+                return next(err);
+            }
+        });
+    }else{
+        return res.status(400).send('Creature entry information missing. Please update and try again');
+    }
 
 
-// });
+});
+
+app.post('/creature', (req, res, next) => {
+
+    const name = req.body.name;
+    const description = req.body.description;
+
+    if(name && description ){
+        pool.query(`INSERT INTO type (name, description,) VALUES ($1, $2,) RETURNING *`, [name, description], (err, data) => {
+            const newType = data.rows[0];
+            console.log("Creature type created", newType);
+
+            if(newCreature){
+                return res.send(newType);
+            }else{
+                return next(err);
+            }
+        });
+    }else{
+        return res.status(400).send('Creature type entry information missing. Please update and try again');
+    }
+
+
+});
 
 // //update a creature with Patch request
 // app.patch('/creature/:id', (req, res, next) => {
@@ -265,7 +269,7 @@ app.listen(port, () => {
 app.use((err, req, res, next) => {
     console.error('We\'re not here right now');
     console.error(err.slack);
-    req.sendStatus(404);
+    req.status(400).send('We\'re not here right now');
 });
 
 module.exports = app;
