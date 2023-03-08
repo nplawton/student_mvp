@@ -49,6 +49,3 @@ setTimeout(() => {
             }
     });
 }, 4000)
-
-//close connection
-pool.end();
