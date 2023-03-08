@@ -20,7 +20,7 @@ pool.query(`CREATE TABLE IF NOT EXISTS creature (
     id SERIAL PRIMARY KEY NOT NULL,
     name VARCHAR(200) NOT NULL,
     alignment_id INTEGER NOT NULL,
-    type_id INTEGER NOT NUL REFERENCES type (type_id),
+    type_id INTEGER NOT NULL REFERENCES type (type_id),
     health INTEGER NOT NULL,
     exp INTEGER NOT NULL,
     chal INTEGER,
