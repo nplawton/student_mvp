@@ -43,6 +43,7 @@ function userStart(){
 }
 
 searchBtn.click((e) => {
+    e.preventDefault(); //prevent the input& search from submitting normally
     startSearch = userInput.val();
     searchReview(startSearch);
     console.log(startSearch);
@@ -65,7 +66,7 @@ function searchReview(startTxt){
 
 function dataReview(startTxt){
 
-    return `https://mvp-creature.onrender.com/creature`;
+    return `https://deploy-50pr.onrender.com/creature`;
 
 }
 
