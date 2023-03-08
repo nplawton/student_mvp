@@ -49,7 +49,7 @@ app.get('/creature', (req, res, next) => {
             return next(err);
         }
     
-        let row = results.rows;
+        let row = data.rows;
         console.log(row);
         res.send(row);
     })
