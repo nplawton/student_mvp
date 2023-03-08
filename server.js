@@ -43,7 +43,7 @@ app.get('/type', (req, res, next) => {
 
 app.get('/creature', (req, res, next) => {
 
-    pool.query('SELECT name, alignment_id, health, exp, chal, descrip_id, stat_id, attack_id, spattack_id, type_id as type_id, FROM creature JOIN type ON creture.type__id = type.type_id', (err, data) => {
+    pool.query('SELECT name, alignment_id, type_id as type_id, health, exp, chal, descrip_id, stat_id, attack_id, spattack_id, FROM creature JOIN type ON creture.type__id = type.type_id', (err, data) => {
         if(err){
             return next(err);
         }
@@ -78,6 +78,33 @@ app.get('/creature/:id', (req, res, next) => {
             return res.send(creature);
         }else{
             return res.status(404).send('No creature was found');
+        }
+    });
+});
+
+app.get('/type/:id', (req, res, next) => {
+    const id = Number.parseInt(req.params.id);
+    console.log(id);
+
+    //If ID is not a number return error
+    if(!Number.parseInt(id)){
+        res.status(404).send(`There is no creature type with id ${id}`);
+    }
+
+    pool.query(`SELECT id, name, description FROM type WHERE id = $1`, 
+    [id], (err, results) => {
+        
+        if(err){
+            return next(err);
+        }
+
+        const creature = results.rows[0];
+        console.log('Creature type found', creature);
+
+        if(creature){
+            return res.send(creature);
+        }else{
+            return res.status(404).send('No creature type was found');
         }
     });
 });
