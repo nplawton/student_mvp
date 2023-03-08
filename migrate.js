@@ -26,7 +26,7 @@ pool.query(`CREATE TABLE IF NOT EXISTS creature (
     descrip_id INTEGER NOT NULL,
     stat_id INTEGER NOT NULL,
     attack_id INTEGER NOT NULL,
-    spattack_id INTEGER NOT NULL,)`, 
+    spattack_id INTEGER NOT NULL)`, 
     (err, creature) => {
         if (err){
             console.log("CREATE TABLE creature failed");
