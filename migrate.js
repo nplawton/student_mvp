@@ -10,6 +10,7 @@ pool.query(`CREATE TABLE IF NOT EXISTS type (
     (err, type) => {
         if (err){
             console.log("CREATE TABLE type failed");
+            console.log(err);
         }else{
             console.log("Type table created sucessfully");
         }
@@ -30,6 +31,7 @@ pool.query(`CREATE TABLE IF NOT EXISTS creature (
     (err, creature) => {
         if (err){
             console.log("CREATE TABLE creature failed");
+            console.log(err);
         }else{
             console.log("Creatures table created sucessfully");
         }
