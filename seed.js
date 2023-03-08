@@ -1,8 +1,7 @@
 const { Pool } = require('pg');
 const pool = require('./dbConn');
 
-pool.query(`INSERT INTO type (name, description) VALUES
-        ON CONFLICT DO NOTHING 
+pool.query(`INSERT INTO type (name, description) VALUES 
         ('Aberration', 'Aberrations are alien entities, often with powers drawn from their minds. All aberrations have darkvision.'),
         ('Beast', 'Beasts are nonhumanoid creatures that are part of the natural world. Some beasts have magical powers, but are generally low in intelligence.'),
         ('Celestial', 'Celestials are creatures native to the Upper Planes, and good by nature.'), 
@@ -19,7 +18,8 @@ pool.query(`INSERT INTO type (name, description) VALUES
         ('Undead', 'An undead is a once-living creature animated by spiritual or supernatural forces. They resist many effects which harm the living, such as poison and disease. They are healed by negative energy. Undead usually have darkvision.'),
         ('Vermin', 'A vermin is an invertebrate, such as an insect, arachnid, arthropod, or worm. Vermin are unintelligent and immune to mind-influencing effects. They usually have darkvision.'),
         ('Monstrous Humanoid', 'A monstrous humanoid is similar to a humanoid, but usually has monstrous or animalistic features. Many also have supernatural abilities. Monstrous humanoids usually have darkvision.'),
-        ('Goblinoid', 'Goblinoids had a typical humanoid anatomy, though their skin tone and texture was often somewhere between that of a human and a snail. The notable exception of this rule was the bugbears whose entire bodies were covered head to toe in thick fur.')`, 
+        ('Goblinoid', 'Goblinoids had a typical humanoid anatomy, though their skin tone and texture was often somewhere between that of a human and a snail. The notable exception of this rule was the bugbears whose entire bodies were covered head to toe in thick fur.')
+        ON CONFLICT (name) DO NOTHING`, 
     (err, type) => {
         if(err){
             console.log("Insert failed");
@@ -30,7 +30,6 @@ pool.query(`INSERT INTO type (name, description) VALUES
 });
 
 pool.query(`INSERT INTO creature (name, alignment_id, type_id, health, exp, chal, descript_id, stat_id, attack_id, spattack_id) VALUES
-        ON CONFLICT DO NOTHING
         ('Aarakocra', 1, 16, 13, 50, 1/4, 1, 1, 1, 1),
         ('Aboleth', 2, 1, 135, 5900, 10, 2, 2, 2, 2),
         ('Animated Object, Armor', 4, 4, 33, 200, 1, 3, 3, 3, 3),
@@ -58,7 +57,8 @@ pool.query(`INSERT INTO creature (name, alignment_id, type_id, health, exp, chal
         ('Chuul', 2, 1, 93, 1100, 4, 25, 25, 25, 25),
         ('Deva', 2, 3, 136, 5900, 10, 26, 26, 26, 26),
         ('Planetar', 2, 3, 200, 15000, 16, 27, 27, 27, 27),
-        ('Solar', 2, 3, 243, 33000, 21, 28, 28, 28, 28)`,
+        ('Solar', 2, 3, 243, 33000, 21, 28, 28, 28, 28),
+        ON CONFLICT (name) DO NOTHING`,
         (err, creature) => {
             if(err){
                 console.log("Insert failed");
