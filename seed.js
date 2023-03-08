@@ -48,7 +48,7 @@ pool.query(`INSERT INTO creature (name, alignment_id, type_id, health, exp, chal
         ('Blight, Needle', 3, 13, 11, 50, 0, 16, 16, 16, 16),
         ('Bugbear', 2, 17, 27, 200, 1, 17, 17, 17, 17),
         ('Bugbear Chief', 4, 17, 65, 700, 3, 18, 18, 18, 18),
-        ('Bulette', 2, 11, 94 1800, 5, 19, 19, 19, 19),
+        ('Bulette', 2, 11, 94, 1800, 5, 19, 19, 19, 19),
         ('Bullywug', 1, 10, 11, 50, 0, 20, 20, 20, 20),
         ('Cambion', 3, 8, 82, 1800, 5, 21, 21, 21, 21),
         ('Carrion Crawler', 3, 11, 51, 450, 2, 22, 22, 22, 22),
