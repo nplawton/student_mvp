@@ -16,19 +16,6 @@ app.use(cors());
 
 const pool = require('./dbConn');
 
-
-// app.get('/creature', (req, res, next) => {
-//     pool.query('SELECT * FROM creature', (err, results) => {
-//         if(err){
-//             return next(err);
-//         }
-    
-//         let row = results.rows;
-//         console.log(row);
-//         res.send(row);
-//     })
-// });
-
 app.get('/type', (req, res, next) => {
     pool.query('SELECT * FROM type', (err, results) => {
         if(err){
@@ -43,7 +30,7 @@ app.get('/type', (req, res, next) => {
 
 app.get('/creature', (req, res, next) => {
 
-    pool.query('SELECT name, alignment_id, type_id as type_id, health, exp, chal, descrip_id, stat_id, attack_id, spattack_id, FROM creature JOIN type ON creture.type__id = type.type_id', (err, data) => {
+    pool.query('SELECT name, alignment_id, type_id as type_id, health, exp, chal, descrip_id, stat_id, attack_id, spattack_id, FROM creature JOIN type ON creture.type_id = type.type_id', (err, data) => {
         if(err){
             return next(err);
         }
@@ -64,7 +51,7 @@ app.get('/creature/:id', (req, res, next) => {
         res.status(404).send(`There is no creature with id ${id}`);
     }
 
-    pool.query(`SELECT id, name, allignment_id, type_id as type_id, health, exp, chal, descrip_id, stat_id, attack_id_ spattck_id FROM creature JOIN type ON creture.type__id = type.type_id WHERE id = $1`, 
+    pool.query(`SELECT id, name, allignment_id, type_id as type_id, health, exp, chal, descrip_id, stat_id, attack_id_ spattck_id FROM creature JOIN type ON creture.type_id = type.type_id WHERE id = $1`, 
     [id], (err, results) => {
         
         if(err){
@@ -111,26 +98,17 @@ app.get('/type/:id', (req, res, next) => {
 // app.post('/creature', (req, res, next) => {
 
 //     const name = req.body.name;
-//     const armor = req.body.armor;
+//     const alignment_id = req.body.alignment_id;
+//     const type_id = req.body.type_id;
 //     const health = req.body.health;
-//     const stre = req.body.stre;
-//     const dex = req.body.dex;
-//     const cons = req.body.cons;
-//     const intel = req.body.intel;
-//     const wis = req.body.wis;
-//     const charisma = req.body.charisma;
+//     const exp = req.body.exp;
 //     const chal = req.body.chal;
-//     const attack = req.body.attack;
-//     const special = req.body.special;
-//     const description = req.body.description;
-//     const mon_img = req.body.mon_img;
+//     const descrip_id = req.body.descrip_id;
+//     const stat_id = req.body.stat_id;
+//     const attack_id = req.body.stat_id;
+//     const spattack_id = req.body.spattack_id;
 
-//     //console.log(`new creature ${name}, has an ac of ${ac} with ${hp} health and challenge of ${chal}`);
-//     //console.log(`${name}, base stat is str ${stre}, dex ${dex}, consti ${cons}, intel ${intel}, charisma ${charisma}`);
-//     //console.log(`${name} will attack ${attack} and ${special} and looks ${description}`);
-//     //console.log(`${name} image located at ${mon_img}`);
-
-//     if(name && !Number.isNaN(armor) && !Number.isNaN(health) && !Number.isNaN(stre) && !Number.isNaN(dex) && !Number.isNaN(cons) && !Number.isNaN(intel) && !Number.isNaN(wis) && !Number.isNaN(charisma) && !Number.isNaN(chal) && attack && special && description && mon_img){
+//     if(name && !Number.isNaN(alignment_id) && !Number.isNaN(type_id) && !Number.isNaN(health) && !Number.isNaN(exp) && !Number.isNaN(chal) && !Number.isNaN(descrip_id) && !Number.isNaN(stat_id) && !Number.isNaN(charisma) && !Number.isNaN(chal) && attack && special && description && mon_img){
 //         pool.query(`INSERT INTO creature (name, armor, health, stre, dex, cons, intel, wis, charisma, chal, attack, special, description, mon_img) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) RETURNING *`, [name, armor, health, stre, dex, cons, intel, wis, charisma, chal, attack, special, description, mon_img], (err, data) => {
 //             const newCreature = data.rows[0];
 //             console.log("Creature created", newCreature);
