@@ -48,4 +48,4 @@ setTimeout(() => {
                 console.log("Creatures table created sucessfully");
             }
     });
-}, 4000)
+}, 4000);

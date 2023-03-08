@@ -17,17 +17,17 @@ app.use(cors());
 const pool = require('./dbConn');
 
 
-app.get('/creature', (req, res, next) => {
-    pool.query('SELECT * FROM creature', (err, results) => {
-        if(err){
-            return next(err);
-        }
+// app.get('/creature', (req, res, next) => {
+//     pool.query('SELECT * FROM creature', (err, results) => {
+//         if(err){
+//             return next(err);
+//         }
     
-        let row = results.rows;
-        console.log(row);
-        res.send(row);
-    })
-});
+//         let row = results.rows;
+//         console.log(row);
+//         res.send(row);
+//     })
+// });
 
 app.get('/type', (req, res, next) => {
     pool.query('SELECT * FROM type', (err, results) => {
@@ -39,6 +39,20 @@ app.get('/type', (req, res, next) => {
         console.log(row);
         res.send(row);
     })
+});
+
+app.get('/creature', (req, res, next) => {
+
+    pool.query('SELECT name, alignment_id, health, exp, chal, descrip_id, stat_id, attack_id, spattack_id, type_id as type_name, FROM creature JOIN type ON creture.type__id = type.type_id', (err, data) => {
+        if(err){
+            return next(err);
+        }
+    
+        let row = results.rows;
+        console.log(row);
+        res.send(row);
+    })
+
 });
 
 app.get('/creature/:id', (req, res, next) => {

@@ -67,6 +67,3 @@ pool.query(`INSERT INTO creature (name, alignment_id, type_id, health, exp, chal
                 console.log(creature);
             }
 });
-
-//close connection
-pool.end();
