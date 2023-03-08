@@ -29,6 +29,18 @@ app.get('/creature', (req, res, next) => {
     })
 });
 
+app.get('/type', (req, res, next) => {
+    pool.query('SELECT * FROM type', (err, results) => {
+        if(err){
+            return next(err);
+        }
+    
+        let row = results.rows;
+        console.log(row);
+        res.send(row);
+    })
+});
+
 app.get('/creature/:id', (req, res, next) => {
     const id = Number.parseInt(req.params.id);
     console.log(id);
