@@ -57,7 +57,7 @@ pool.query(`INSERT INTO creature (name, alignment_id, type_id, health, exp, chal
         ('Chuul', 2, 1, 93, 1100, 4, 25, 25, 25, 25),
         ('Deva', 2, 3, 136, 5900, 10, 26, 26, 26, 26),
         ('Planetar', 2, 3, 200, 15000, 16, 27, 27, 27, 27),
-        ('Solar', 2, 3, 243, 33000, 21, 28, 28, 28, 28),
+        ('Solar', 2, 3, 243, 33000, 21, 28, 28, 28, 28)
         ON CONFLICT (id) DO NOTHING`,
         (err, creature) => {
             if(err){
