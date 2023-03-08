@@ -5,6 +5,9 @@
 //slide carousel variables
 let slideCon = $('.slide_container');
 let slideTrack = $('#slide_track');
+//carousel functionality
+let nextBtn = $('#next');
+let prevBtn = $('#prev');
 
 let card = {};
 
@@ -14,6 +17,9 @@ let searchBtn = $('#submit');
 
 //Search Criteria
 let startSearch;
+
+//display variable
+let display = $('.display-holder')
 
 //CRUD Buttons
 let deleteBtn = $('#delete');
@@ -40,6 +46,10 @@ searchBtn.click((e) => {
     startSearch = userInput.val();
     searchReview(startSearch);
     console.log(startSearch);
+
+    //display items
+    display.empty();
+    display.removeClass('active');
     
 });
 
@@ -67,7 +77,7 @@ function slideActivate(searchTxt){
 
     //When staring with initial data rerun the get request
     $.get(searchVaults, (data) => {
-        console.log('new', data);
+        //console.log('new', data);
 
         for(let i = 0; i < data.length; i++){
             let searchVault = data[i];
@@ -107,6 +117,57 @@ function slideActivate(searchTxt){
     });
 }
 
+slideTrack.click((e) => {
+    //console.log('hi');
+
+    //When selecting class make sure you select the element storing the id of the object to be selected
+    let resultElement = e.target.getAttribute('class') === 'slide-img';
+    //console.log(resultElement);
+
+    if(resultElement){
+        //Activate curtrent selected creature
+        display.addClass('active');
+        //disable previous creature
+        display.empty();
+
+        let cardId = e.target.id;
+        //console.log(cardId);
+
+        //the gobal defined OBJ is the start of the right argument
+        let cardDisplay = card[cardId];
+        //console.log(cardDisplay);
+
+        let cardReaveal = displayWindow(cardDisplay);
+        display.append(cardReaveal);
+
+    }
+
+}); 
+
+/*
+    This function will allow the user to select a result from the slide carousel
+    & have it displayed in the display window area
+*/
+//Display window function -- results from selecting a slide
+function displayWindow(cardDisplay){
+    //Build the return as the DOM would appear
+    //All values are coming from the card creatir function  Object
+    return`
+        <div id="display-box">
+            <h1 id="dis-title">${cardDisplay.disTitle}</h1>
+            <div id="stats">Creature Information
+                <p>STR:${cardDisplay.strength}/ DEX:${cardDisplay.dex}/ CON:${cardDisplay.cons}/ INT:${cardDisplay.intel}/ WIS:${cardDisplay.wis}/ CHA:${cardDisplay.charisma}</p>
+                <p>Armor Class:${cardDisplay.armor}/ Hit Points:${cardDisplay.health}/ Challenge:${cardDisplay.chal}</p>
+            </div>
+            <div id="grid">
+                <div id="attack">${cardDisplay.attack}</div>
+                <img id="${cardDisplay.id}" class="mon_img" src="${cardDisplay.disImg}"></img>
+                <div id="special">${cardDisplay.special}</div>
+            </div>
+            <p id="text">${cardDisplay.mon_des}</p>
+        </div>
+    `
+}
 
 // //Delete Element Test
 // deleteBtn.click((e) => {
@@ -120,6 +181,65 @@ function cardCreator(searchVault){
         id: searchVault.id,
         //Slide varibles
         slideTitle: `<h1 id="${searchVault.id}" class="slide-title">${searchVault.name}</h1>`,
-        slideImg: `<img id="${searchVault.id}" class="slide-img" src="${searchVault.mon_img}"></img>`
+        slideImg: `<img id="${searchVault.id}" class="slide-img" src="${searchVault.mon_img}"></img>`,
+        //Display window variables
+        disTitle: searchVault.name.toUpperCase(),
+        disImg: searchVault.mon_img,
+        armor: searchVault.armor,
+        health: searchVault.health,
+        strength: searchVault.stre,
+        dex: searchVault.dex,
+        cons: searchVault.cons,
+        intel: searchVault.intel,
+        wis: searchVault.wis,
+        charisma: searchVault.charisma,
+        chal: searchVault.chal,
+        attack: searchVault.attack,
+        special: searchVault.special,
+        mon_des: searchVault.description, //[0].description
     }
 }
+
+nextBtn.click(() => {
+    //console.log('next button action', slideTrack);
+
+    //Establishing the two slides needed
+    const currentSlide = $('.active');
+    const nextSlide = currentSlide[0].nextElementSibling || slideTrack[0].lastElementChild;
+    //console.log(currentSlide);
+    
+    //clear the current display window
+    display.empty();
+    
+    //how to much to move towards the next slide
+    const moveAmount = nextSlide.style.left;
+    //console.log(moveAmount);
+    
+    //move to next slide
+    slideTrack.css('transform', `translateX(-${moveAmount})`);
+    currentSlide.removeClass('active');
+    nextSlide.classList.add('active');
+
+});
+
+prevBtn.click(() => {
+    //console.log(slideTrack);
+    
+    //Establishing the two slides needed
+    const currentSlide = $('.active');
+    const prevSlide = currentSlide[0].previousElementSibling || slideTrack[0].firstElementChild;
+    //console.log(currentSlide);
+    
+    //clear the current display window
+    display.empty();
+    
+    //how to much to move towards the previous slide
+    const moveAmount = prevSlide.style.left;
+    //console.log(moveAmount);
+    
+    //move to the previous slide
+    slideTrack.css('transform', `translateX(-${moveAmount})`);
+    currentSlide.removeClass('active');
+    prevSlide.classList.add('active');
+
+});
