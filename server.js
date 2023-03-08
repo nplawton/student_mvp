@@ -42,7 +42,7 @@ app.get('/creature', (req, res, next) => {
                 c.attack_id, 
                 c.spattack_id 
                 FROM creature c
-                JOIN type t ON c.type_id = t.type_id`, 
+                LEFT JOIN type t ON c.type_id = t.type_id`, 
     (err, data) => {
         if(err){
             console.log(err);
