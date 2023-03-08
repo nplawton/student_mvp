@@ -45,114 +45,118 @@ app.get('/creature', (req, res, next) => {
 });
 
 
-//
-app.get('/creature/:id', (req, res, next) => {
-    const id = Number.parseInt(req.params.id);
-    console.log(id);
+// //Single Get Request for each Table. Currently Functioning:
+// app.get('/creature/:id', (req, res, next) => {
+//     const id = Number.parseInt(req.params.id);
+//     console.log(id);
 
-    //If ID is not a number return error
-    if(!Number.parseInt(id)){
-        res.status(404).send(`There is no creature with id ${id}`);
-    }
+//     //If ID is not a number return error
+//     if(!Number.parseInt(id)){
+//         res.status(404).send(`There is no creature with id ${id}`);
+//     }
 
-    pool.query(`SELECT id, name, allignment_id, type_id as type_id, health, exp, chal, descrip_id, stat_id, attack_id_ spattck_id FROM creature JOIN type ON creture.type_id = type.type_id WHERE id = $1`, 
-    [id], (err, results) => {
+//     pool.query(`SELECT id, name, allignment_id, type_id as type_id, health, exp, chal, descrip_id, stat_id, attack_id_ spattck_id FROM creature JOIN type ON creture.type_id = type.type_id WHERE id = $1`, 
+//     [id], (err, results) => {
         
-        if(err){
-            return next(err);
-        }
+//         if(err){
+//             return next(err);
+//         }
 
-        const creature = results.rows[0];
-        console.log('Single Creature found', creature);
+//         const creature = results.rows[0];
+//         console.log('Single Creature found', creature);
 
-        if(creature){
-            return res.send(creature);
-        }else{
-            return res.status(404).send('No creature was found');
-        }
-    });
-});
+//         if(creature){
+//             return res.send(creature);
+//         }else{
+//             return res.status(404).send('No creature was found');
+//         }
+//     });
+// });
 
-app.get('/type/:id', (req, res, next) => {
-    const id = Number.parseInt(req.params.id);
-    console.log(id);
+// app.get('/type/:id', (req, res, next) => {
+//     const id = Number.parseInt(req.params.id);
+//     console.log(id);
 
-    //If ID is not a number return error
-    if(!Number.parseInt(id)){
-        res.status(404).send(`There is no creature type with id ${id}`);
-    }
+//     //If ID is not a number return error
+//     if(!Number.parseInt(id)){
+//         res.status(404).send(`There is no creature type with id ${id}`);
+//     }
 
-    pool.query(`SELECT * FROM type WHERE id = $1`, [id], (err, results) => {
+//     pool.query(`SELECT * FROM type WHERE id = $1`, [id], (err, results) => {
         
-        if(err){
-            return next(err);
-        }
+//         if(err){
+//             return next(err);
+//         }
 
-        const type = results.rows[0];
-        console.log('Creature type found', type);
+//         const type = results.rows[0];
+//         console.log('Creature type found', type);
 
-        if(creature){
-            return res.send(type);
-        }else{
-            return res.status(404).send('No creature type was found');
-        }
-    });
-});
-
-app.post('/creature', (req, res, next) => {
-
-    const name = req.body.name;
-    const alignment_id = req.body.alignment_id;
-    const type_id = req.body.type_id;
-    const health = req.body.health;
-    const exp = req.body.exp;
-    const chal = req.body.chal;
-    const descrip_id = req.body.descrip_id;
-    const stat_id = req.body.stat_id;
-    const attack_id = req.body.stat_id;
-    const spattack_id = req.body.spattack_id;
-
-    if(name && !Number.isNaN(alignment_id) && !Number.isNaN(type_id) && !Number.isNaN(health) && !Number.isNaN(exp) && !Number.isNaN(chal) && !Number.isNaN(descrip_id) && !Number.isNaN(stat_id) && !Number.isNaN(attack_id) && !Number.isNaN(spattack_id)){
-        pool.query(`INSERT INTO creature (name, type_id, health, exp, chal, descrip_id, stat_id, attack_id, spattack_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *`, [name, alignment_id, type_id, health, exp, chal, descrip_id, stat_id, attack_id, spattack_id], (err, data) => {
-            const newCreature = data.rows[0];
-            console.log("Creature created", newCreature);
-
-            if(newCreature){
-                return res.send(newCreature);
-            }else{
-                return next(err);
-            }
-        });
-    }else{
-        return res.status(400).send('Creature entry information missing. Please update and try again');
-    }
+//         if(creature){
+//             return res.send(type);
+//         }else{
+//             return res.status(404).send('No creature type was found');
+//         }
+//     });
+// });
 
 
-});
+// //Post new information Request for each Table. Currently Functioning:
+// app.post('/creature', (req, res, next) => {
 
-app.post('/creature', (req, res, next) => {
+//     const name = req.body.name;
+//     const alignment_id = req.body.alignment_id;
+//     const type_id = req.body.type_id;
+//     const health = req.body.health;
+//     const exp = req.body.exp;
+//     const chal = req.body.chal;
+//     const descrip_id = req.body.descrip_id;
+//     const stat_id = req.body.stat_id;
+//     const attack_id = req.body.stat_id;
+//     const spattack_id = req.body.spattack_id;
 
-    const name = req.body.name;
-    const description = req.body.description;
+//     if(name && !Number.isNaN(alignment_id) && !Number.isNaN(type_id) && !Number.isNaN(health) && !Number.isNaN(exp) && !Number.isNaN(chal) && !Number.isNaN(descrip_id) && !Number.isNaN(stat_id) && !Number.isNaN(attack_id) && !Number.isNaN(spattack_id)){
+//         pool.query(`INSERT INTO creature (name, type_id, health, exp, chal, descrip_id, stat_id, attack_id, spattack_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *`, [name, alignment_id, type_id, health, exp, chal, descrip_id, stat_id, attack_id, spattack_id], (err, data) => {
+//             const newCreature = data.rows[0];
+//             console.log("Creature created", newCreature);
 
-    if(name && description ){
-        pool.query(`INSERT INTO type (name, description,) VALUES ($1, $2,) RETURNING *`, [name, description], (err, data) => {
-            const newType = data.rows[0];
-            console.log("Creature type created", newType);
-
-            if(newCreature){
-                return res.send(newType);
-            }else{
-                return next(err);
-            }
-        });
-    }else{
-        return res.status(400).send('Creature type entry information missing. Please update and try again');
-    }
+//             if(newCreature){
+//                 return res.send(newCreature);
+//             }else{
+//                 return next(err);
+//             }
+//         });
+//     }else{
+//         return res.status(400).send('Creature entry information missing. Please update and try again');
+//     }
 
 
-});
+// });
 
+// app.post('/creature', (req, res, next) => {
+
+//     const name = req.body.name;
+//     const description = req.body.description;
+
+//     if(name && description ){
+//         pool.query(`INSERT INTO type (name, description,) VALUES ($1, $2,) RETURNING *`, [name, description], (err, data) => {
+//             const newType = data.rows[0];
+//             console.log("Creature type created", newType);
+
+//             if(newCreature){
+//                 return res.send(newType);
+//             }else{
+//                 return next(err);
+//             }
+//         });
+//     }else{
+//         return res.status(400).send('Creature type entry information missing. Please update and try again');
+//     }
+
+
+// });
+
+
+//Update new information Request for each Table. Currently Functioning:
 // //update a creature with Patch request
 // app.patch('/creature/:id', (req, res, next) => {
 //     const id = req.params.id;
@@ -160,19 +164,15 @@ app.post('/creature', (req, res, next) => {
 
 //     //get the change/update information from the request body
 //     const name = req.body.name;
-//     const armor = req.body.armor;
+//     const alignment_id = req.body.alignment_id;
+//     const type_id = req.body.type_id;
 //     const health = req.body.health;
-//     const stre = req.body.stre;
-//     const dex = req.body.dex;
-//     const cons = req.body.cons;
-//     const intel = req.body.intel;
-//     const wis = req.body.wis;
-//     const charisma = req.body.charisma;
+//     const exp = req.body.exp;
 //     const chal = req.body.chal;
-//     const attack = req.body.attack;
-//     const special = req.body.special;
-//     const description = req.body.description;
-//     const mon_img = req.body.mon_img;
+//     const descrip_id = req.body.descrip_id;
+//     const stat_id = req.body.stat_id;
+//     const attack_id = req.body.stat_id;
+//     const spattack_id = req.body.spattack_id;
 
 //     // if(!Number.isInteger(id)){
 //     //     res.status(404).send(`No creature with the id ${id}`);
@@ -184,7 +184,7 @@ app.post('/creature', (req, res, next) => {
 //         }
 
 //         //make sure update/change information is still accessable
-//         //console.log('Information to Change/Update', req.body);
+//         console.log('Information to Change/Update', req.body);
 
 //         const creature = results.rows[0];
 
@@ -197,19 +197,15 @@ app.post('/creature', (req, res, next) => {
 
 //             //List all columns in the database table there is not limit to the $s
 //             const updatedName = name || creature.name;
-//             const updatedArmor = armor || creature.armor;
+//             const updatedAlignment = alignment_id || creature.alignment_id;
+//             const updatedType = type_id || creature.type_id;
 //             const updatedHealth = health || creature.health;
-//             const updatedStre = stre || creature.stre;
-//             const updatedDex = dex || creature.dex;
-//             const updatedCons = cons || creature.cons;
-//             const updatedIntel = intel || creature.intel;
-//             const updatedWis = wis || creature.wis;
-//             const updatedCharisma = charisma || creature.charisma;
+//             const updatedExp = exp || creature.exp;
 //             const updatedChal = chal || creature.chal;
-//             const updatedAttack = attack || creature.attack;
-//             const updatedSpecial = special || creature.special;
-//             const updatedDescription = description || creature.description;
-//             const updatedMon_img = mon_img || creature.mon_img;
+//             const updatedDescrip = descrip_id || creature.descrip_id;
+//             const updatedStat = stat_id || creature.stat_id;
+//             const updatedAttack = attack_id || creature.attack_id;
+//             const updatedSpecial = spattack_id || creature.spattack_id;
 
 //             pool.query('UPDATE creature SET name = $1, armor = $2, health = $3, stre = $4, dex = $5, cons = $6, intel = $7, wis = $8, charisma = $9, chal = $10, attack = $11, special = $12, description = $13, mon_img = $14 WHERE id = $15 RETURNING *',
 //                     [updatedName, updatedArmor, updatedHealth, updatedStre, updatedDex, updatedCons, updatedIntel, updatedWis, updatedCharisma, updatedChal, updatedAttack, updatedSpecial, updatedDescription, updatedMon_img, id], (err, data) => {
@@ -267,7 +263,7 @@ app.listen(port, () => {
 
 
 app.use((err, req, res, next) => {
-    console.error('We\'re not here right now');
+    //console.error('We\'re not here right now');
     console.error(err.slack);
     req.status(400).send('We\'re not here right now');
 });
