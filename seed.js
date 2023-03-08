@@ -23,6 +23,7 @@ pool.query(`INSERT INTO type (name, description) VALUES
     (err, type) => {
         if(err){
             console.log("Insert failed");
+            console.log(err);
         }else{
             console.log(type);
         }
@@ -35,8 +36,8 @@ pool.query(`INSERT INTO creature (name, alignment_id, type_id, health, exp, chal
         ('Animated Object, Armor', 4, 4, 33, 200, 1, 3, 3, 3, 3),
         ('Animated Object, Flying Sword', 5, 4, 17, 50, 1/4, 4, 4, 4, 4),
         ('Animated Object, Rug of Smothering', 5, 4, 33, 450, 2, 5, 5, 5, 5),
-        ('Ankheg',5, 11, 39, 450, 2, 6, 6, 6, 6),
-        ('Azer' 5, 6, 39, 450, 2, 7, 7, 7, 7),
+        ('Ankheg', 5, 11, 39, 450, 2, 6, 6, 6, 6),
+        ('Azer', 5, 6, 39, 450, 2, 7, 7, 7, 7),
         ('Banshee', 6, 14, 58, 1100, 4, 8, 8, 8, 8),
         ('Basilisk', 2, 11, 52, 700, 3, 9, 9, 9, 9),
         ('Behir', 1, 11, 168, 7200, 11 10, 10, 10, 10),
@@ -61,6 +62,7 @@ pool.query(`INSERT INTO creature (name, alignment_id, type_id, health, exp, chal
         (err, creature) => {
             if(err){
                 console.log("Insert failed");
+                console.log(err);
             }else{
                 console.log(creature);
             }
