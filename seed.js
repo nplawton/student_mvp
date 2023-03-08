@@ -39,7 +39,7 @@ pool.query(`INSERT INTO creature (name, alignment_id, type_id, health, exp, chal
         ('Azer', 5, 6, 39, 450, 2, 7, 7, 7, 7),
         ('Banshee', 6, 14, 58, 1100, 4, 8, 8, 8, 8),
         ('Basilisk', 2, 11, 52, 700, 3, 9, 9, 9, 9),
-        ('Behir', 1, 11, 168, 7200, 11 10, 10, 10, 10),
+        ('Behir', 1, 11, 168, 7200, 11, 10, 10, 10, 10),
         ('Beholder', 2, 1, 180, 10000, 13, 11, 11, 11, 11),
         ('Beholder, Death Tyrant', 1, 14 187, 11500, 14, 12, 12, 12, 12),
         ('Beholder, Spectator', 1, 1, 39, 700, 3, 13, 13, 13, 13),
