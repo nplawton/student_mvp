@@ -203,73 +203,73 @@ app.post('/creature', (req, res, next) => {
 
 
 //Update new information Request for each Table. Currently Functioning:
-// //update a creature with Patch request
-// app.patch('/creature/:id', (req, res, next) => {
-//     const id = req.params.id;
-//     //console.log(id);
+//update a creature with Patch request
+app.patch('/creature/:id', (req, res, next) => {
+    const id = req.params.id;
+    //console.log(id);
 
-//     //get the change/update information from the request body
-//     const name = req.body.name;
-//     const alignment_id = req.body.alignment_id;
-//     const type_id = req.body.type_id;
-//     const health = req.body.health;
-//     const exp = req.body.exp;
-//     const chal = req.body.chal;
-//     const descrip_id = req.body.descrip_id;
-//     const stat_id = req.body.stat_id;
-//     const attack_id = req.body.stat_id;
-//     const spattack_id = req.body.spattack_id;
+    //get the change/update information from the request body
+    const c_name = req.body.c_name;
+    const alignment_id = req.body.alignment_id;
+    const type_id = req.body.type_id;
+    const health = req.body.health;
+    const exp = req.body.exp;
+    const chal = req.body.chal;
+    const descrip_id = req.body.descrip_id;
+    const stat_id = req.body.stat_id;
+    const attack_id = req.body.stat_id;
+    const spattack_id = req.body.spattack_id;
 
-//     // if(!Number.isInteger(id)){
-//     //     res.status(404).send(`No creature with the id ${id}`);
-//     // }
+    // if(!Number.isInteger(id)){
+    //     res.status(404).send(`No creature with the id ${id}`);
+    // }
 
-//     pool.query('SELECT * FROM creature WHERE id = $1', [id], (err,results) => {
-//         if(err){
-//             return next(err);
-//         }
+    pool.query('SELECT * FROM creature WHERE id = $1', [id], (err,results) => {
+        if(err){
+            return next(err);
+        }
 
-//         //make sure update/change information is still accessable
-//         console.log('Information to Change/Update', req.body);
+        //make sure update/change information is still accessable
+        console.log('Information to Change/Update', req.body);
 
-//         const creature = results.rows[0];
+        const creature = results.rows[0];
 
-//         //the object entity can't go into the back tick string
-//         //console.log(`Single PET ID from database, ${id}, with values:`, creature);
+        //the object entity can't go into the back tick string
+        //console.log(`Single PET ID from database, ${id}, with values:`, creature);
 
-//         if(!creature){
-//             return res.status(404).send("No creature, please check the id an try again");
-//         }else{
+        if(!creature){
+            return res.status(404).send("No creature, please check the id an try again");
+        }else{
 
-//             //List all columns in the database table there is not limit to the $s
-//             const updatedName = name || creature.name;
-//             const updatedAlignment = alignment_id || creature.alignment_id;
-//             const updatedType = type_id || creature.type_id;
-//             const updatedHealth = health || creature.health;
-//             const updatedExp = exp || creature.exp;
-//             const updatedChal = chal || creature.chal;
-//             const updatedDescrip = descrip_id || creature.descrip_id;
-//             const updatedStat = stat_id || creature.stat_id;
-//             const updatedAttack = attack_id || creature.attack_id;
-//             const updatedSpecial = spattack_id || creature.spattack_id;
+            //List all columns in the database table there is not limit to the $s
+            const updatedName = c_name || creature.c_name;
+            const updatedAlignment = alignment_id || creature.alignment_id;
+            const updatedType = type_id || creature.type_id;
+            const updatedHealth = health || creature.health;
+            const updatedExp = exp || creature.exp;
+            const updatedChal = chal || creature.chal;
+            const updatedDescrip = descrip_id || creature.descrip_id;
+            const updatedStat = stat_id || creature.stat_id;
+            const updatedAttack = attack_id || creature.attack_id;
+            const updatedSpecial = spattack_id || creature.spattack_id;
 
-//             pool.query('UPDATE creature SET name = $1, alignment_id = $2, type_id = $3, health = $4, exp = $5, chal = $6, descrip_id = $7, stat_id = $8, attack_ida = $9, spattack_id = $10 WHERE id = $11 RETURNING *',
-//                     [updatedName, updatedAlignment, updatedType, updatedHealth, updatedExp, updatedChal, updatedDescrip, updatedStat, updatedAttack, updatedSpecial, id], (err, data) => {
+            pool.query('UPDATE creature SET c_name = $1, alignment_id = $2, type_id = $3, health = $4, exp = $5, chal = $6, descrip_id = $7, stat_id = $8, attack_ida = $9, spattack_id = $10 WHERE id = $11 RETURNING *',
+                    [updatedName, updatedAlignment, updatedType, updatedHealth, updatedExp, updatedChal, updatedDescrip, updatedStat, updatedAttack, updatedSpecial, id], (err, data) => {
 
-//                         if(err){
-//                             return next(err);
-//                         }
+                        if(err){
+                            return next(err);
+                        }
 
-//                         const updatedCreature = data.rows[0];
-//                         //console.log('Updated create values');
-//                         return res.send(updatedCreature);
-//             });
+                        const updatedCreature = data.rows[0];
+                        //console.log('Updated create values');
+                        return res.send(updatedCreature);
+            });
 
-//         }
+        }
 
-//     });
+    });
 
-// })
+})
 
 
 // //Delete a creature
