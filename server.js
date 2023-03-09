@@ -51,12 +51,15 @@ app.get('/creature', (req, res, next) => {
                 c.alignment_id, 
                 t.t_name, t.description, 
                 c.health, c.exp, c.chal, 
-                c.descrip_id, 
+                d.size, d.speed,
+                d.d_descrip, d.info,
+                d.mon_img 
                 c.stat_id, 
                 c.attack_id, 
                 c.spattack_id 
                 FROM creature c
-                LEFT JOIN type t ON c.type_id = t.type_id`, 
+                LEFT JOIN type t ON c.type_id = t.type_id
+                LEFT JOIN descrip d ON c.descrip_id = d.descrip_id`, 
     (err, data) => {
         if(err){
             console.log(err);
