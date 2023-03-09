@@ -16,7 +16,7 @@ let userInput = $('#search');
 let searchBtn = $('#submit');
 
 //Search Criteria
-let startSearch;
+let startSearch = 'a';
 
 //display variable
 let display = $('.display-holder')
@@ -24,6 +24,10 @@ let display = $('.display-holder')
 //CRUD Buttons
 let deleteBtn = $('#delete');
 //console.log(deleteBtn);
+
+//AJAX Calls
+// let req = new XMLHttpRequest();
+// let postBtn = $('#post')
 
 //Global Variables end
 
@@ -35,6 +39,7 @@ userStart();
 function userStart(){
     userInput.keyup((e) => {
         let searchValue = e.target.value;
+        //console.log(searchValue);
         if(searchValue && searchValue.trim().length > 0){
             let searchValues = searchValue.toLowerCase();
             userInput.text(searchValues);
@@ -43,7 +48,6 @@ function userStart(){
 }
 
 searchBtn.click((e) => {
-    e.preventDefault(); //prevent the input& search from submitting normally
     startSearch = userInput.val();
     searchReview(startSearch);
     console.log(startSearch);
@@ -66,7 +70,7 @@ function searchReview(startTxt){
 
 function dataReview(startTxt){
 
-    return `https://test2-5wmp.onrender.com/creature`;
+    return `https://test2-5wmp.onrender.com/creature?q=${startSearch}`;
 
 }
 
@@ -158,7 +162,7 @@ function displayWindow(cardDisplay){
             <h1 id="dis-title">${cardDisplay.disTitle}</h1>
             <div id="stats">Creature Information
                 <p>Hit Points:${cardDisplay.health}/ Challenge:${cardDisplay.chal} with (${cardDisplay.exp})xp</p>
-                <p>The ${cardDisplay.senTitle} is a ${cardDisplay.type} that can move ${cardDisplay.speed}, and is considered ${cardDisplay.size} creature.</p>
+                <p>The ${cardDisplay.senTitle} is a ${cardDisplay.type} that can move while ${cardDisplay.speed}, and is considered a ${cardDisplay.size} creature.</p>
             </div>
             <div id="grid">
                 <img id="${cardDisplay.id}" class="mon_img" src="${cardDisplay.disImg}"></img>
@@ -176,11 +180,6 @@ function displayWindow(cardDisplay){
     <div id="attack">${cardDisplay.attack}</div>
     <div id="special">${cardDisplay.special}</div>
 */
-
-// //Delete Element Test
-// deleteBtn.click((e) => {
-    
-// });
 
 //Blank Card Hoolder to hold information using the id selected card
 // below every function minus the carousel

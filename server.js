@@ -27,7 +27,7 @@ app.get('/type', (req, res, next) => {
         let row = results.rows;
         console.log(row);
         res.send(row);
-    })
+    });
 });
 
 //Get Request for each Table. Currently Functioning: type
@@ -40,12 +40,23 @@ app.get('/descrip', (req, res, next) => {
         let row = results.rows;
         console.log(row);
         res.send(row);
-    })
+    });
+});
+
+app.get('/creatures', (req, res, next) => {
+    pool.query('SELECT * FROM creature', (err, results) => {
+        if(err){
+            return next(err);
+        }
+    
+        let row = results.rows;
+        console.log(row);
+        res.send(row);
+    });
 });
 
 
 app.get('/creature', (req, res, next) => {
-
     pool.query(`SELECT 
         c.id,
         c.c_name, 
@@ -116,6 +127,37 @@ app.get('/creature/:id', (req, res, next) => {
                     }
                 });
 });
+
+// const getAll = pool.query(`SELECT id, 
+//         c.c_name, 
+//         c.alignment_id, 
+//         t.t_name, t.t_description, 
+//         c.health, c.exp, c.chal, 
+//         d.size, d.speed,
+//         d.d_descrip, d.info,
+//         d.mon_img, 
+//         c.stat_id, 
+//         c.attack_id, 
+//         c.spattack_id 
+//         FROM creature c
+//         LEFT JOIN type t ON c.type_id = t.type_id
+//         LEFT JOIN descrip d ON c.descrip_id = d.descrip_id 
+//         WHERE id = $1`, 
+//     (err, results) => {
+        
+//         if(err){
+//             return next(err);
+//         }
+
+//         const creature = results.rows[0];
+//         console.log('Single Creature found', creature);
+
+//         if(creature){
+//             return res.send(creature);
+//         }else{
+//             return res.status(404).send('No creature was found');
+//         }
+//     });
 
 // app.get('/type/:id', (req, res, next) => {
 //     const id = req.params.id;
