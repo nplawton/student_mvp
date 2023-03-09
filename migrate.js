@@ -28,9 +28,9 @@ setTimeout(() => {
 }, 2000);
 
 setTimeout(() => {
-    pool.query(`CREATE TABLE IF NOT EXISTS descrip(
+    pool.query(`CREATE TABLE IF NOT EXISTS descrip (
         descrip_id SERIAL PRIMARY KEY NOT NULL,
-        size VARCAHR(200),
+        size text,
         speed text,
         d_descrip text,
         info text,

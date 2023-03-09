@@ -30,6 +30,20 @@ app.get('/type', (req, res, next) => {
     })
 });
 
+//Get Request for each Table. Currently Functioning: type
+app.get('/descrip', (req, res, next) => {
+    pool.query('SELECT * FROM descrip', (err, results) => {
+        if(err){
+            return next(err);
+        }
+    
+        let row = results.rows;
+        console.log(row);
+        res.send(row);
+    })
+});
+
+
 app.get('/creature', (req, res, next) => {
 
     pool.query(`SELECT 
