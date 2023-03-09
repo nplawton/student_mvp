@@ -205,7 +205,7 @@ app.post('/creature', (req, res, next) => {
 //Update new information Request for each Table. Currently Functioning:
 //update a creature with Patch request
 app.patch('/creature/:id', (req, res, next) => {
-    const id = req.params.id;
+    const id = Number.parseInt(req.params.id);
     //console.log(id);
 
     //get the change/update information from the request body
