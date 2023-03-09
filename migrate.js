@@ -53,7 +53,7 @@ setTimeout(() => {
         health INTEGER NOT NULL,
         exp INTEGER NOT NULL,
         chal INTEGER,
-        descrip_id INTEGER NOT NULL REFERENCES type (descrip_id),
+        descrip_id INTEGER NOT NULL REFERENCES descrip (descrip_id),
         stat_id INTEGER NOT NULL,
         attack_id INTEGER NOT NULL,
         spattack_id INTEGER NOT NULL)`, 
