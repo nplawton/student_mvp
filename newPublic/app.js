@@ -158,12 +158,13 @@ function displayWindow(cardDisplay){
             <h1 id="dis-title">${cardDisplay.disTitle}</h1>
             <div id="stats">Creature Information
                 <p>Hit Points:${cardDisplay.health}/ Challenge:${cardDisplay.chal} with (${cardDisplay.exp})xp</p>
+                <p>The ${cardDisplay.senTitle} is a ${cardDisplay.type} that can move ${cardDisplay.speed}, and is considered ${cardDisplay.size} creature.</p>
             </div>
             <div id="grid">
                 <img id="${cardDisplay.id}" class="mon_img" src="${cardDisplay.disImg}"></img>
             </div>
-            <p id="text">${cardDisplay.mon_des}</p>
-            <p id="text>${cardDisplay.info}</p>
+            <div id="text">${cardDisplay.mon_des}</div>
+            <div id="text">${cardDisplay.info}</div>
         </div>
     `
 }
@@ -205,7 +206,11 @@ function cardCreator(searchVault){
         //special: searchVault.special,
         mon_des: searchVault.d_descrip, //[0].description
         exp: searchVault.exp,
-        info: searchVault.info
+        info: searchVault.info,
+        size: searchVault.size,
+        speed: searchVault.speed,
+        type: searchVault.t_name,
+        senTitle: searchVault.c_name.toUpperCase(),
     }
 }
 

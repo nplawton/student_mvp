@@ -147,7 +147,7 @@ app.get('/creature/:id', (req, res, next) => {
 //Post new information Request for each Table. Currently Functioning:
 app.post('/creature', (req, res, next) => {
 
-    const name = req.body.name;
+    const c_name = req.body.c_name;
     const alignment_id = req.body.alignment_id;
     const type_id = req.body.type_id;
     const health = req.body.health;
@@ -158,8 +158,9 @@ app.post('/creature', (req, res, next) => {
     const attack_id = req.body.stat_id;
     const spattack_id = req.body.spattack_id;
 
-    if(name && !Number.isNaN(alignment_id) && !Number.isNaN(type_id) && !Number.isNaN(health) && !Number.isNaN(exp) && !Number.isNaN(chal) && !Number.isNaN(descrip_id) && !Number.isNaN(stat_id) && !Number.isNaN(attack_id) && !Number.isNaN(spattack_id)){
-        pool.query(`INSERT INTO creature (name, alignment_id, type_id, health, exp, chal, descrip_id, stat_id, attack_id, spattack_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *`, [name, alignment_id, type_id, health, exp, chal, descrip_id, stat_id, attack_id, spattack_id], (err, data) => {
+    if(c_name && alignment_id && type_id && health && exp && chal && descrip_id && stat_id && attack_id && spattack_id){
+        pool.query(`INSERT INTO creature (c_name, alignment_id, type_id, health, exp, chal, descrip_id, stat_id, attack_id, spattack_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *`, 
+        [c_name, alignment_id, type_id, health, exp, chal, descrip_id, stat_id, attack_id, spattack_id], (err, data) => {
             const newCreature = data.rows[0];
             console.log("Creature created", newCreature);
 
@@ -176,13 +177,13 @@ app.post('/creature', (req, res, next) => {
 
 });
 
-// app.post('/creature', (req, res, next) => {
+// app.post('/type', (req, res, next) => {
 
-//     const name = req.body.name;
-//     const description = req.body.description;
+//     const name = req.body.t_name;
+//     const description = req.body.t_description;
 
 //     if(name && description ){
-//         pool.query(`INSERT INTO type (name, description,) VALUES ($1, $2,) RETURNING *`, [name, description], (err, data) => {
+//         pool.query(`INSERT INTO type (Tname, description,) VALUES ($1, $2,) RETURNING *`, [name, description], (err, data) => {
 //             const newType = data.rows[0];
 //             console.log("Creature type created", newType);
 
