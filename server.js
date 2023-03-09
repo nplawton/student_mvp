@@ -224,7 +224,7 @@ app.patch('/creature/:id', (req, res, next) => {
     //     res.status(404).send(`No creature with the id ${id}`);
     // }
 
-    pool.query('SELECT * FROM creature WHERE id = $1', [id], (err,results) => {
+    pool.query(`SELECT * FROM creature WHERE id = $1`, [id], (err,results) => {
         if(err){
             return next(err);
         }
@@ -253,7 +253,7 @@ app.patch('/creature/:id', (req, res, next) => {
             const updatedAttack = attack_id || creature.attack_id;
             const updatedSpecial = spattack_id || creature.spattack_id;
 
-            pool.query('UPDATE creature SET c_name = $1, alignment_id = $2, type_id = $3, health = $4, exp = $5, chal = $6, descrip_id = $7, stat_id = $8, attack_ida = $9, spattack_id = $10 WHERE id = $11 RETURNING *',
+            pool.query('UPDATE creature SET c_name = $1, alignment_id = $2, type_id = $3, health = $4, exp = $5, chal = $6, descrip_id = $7, stat_id = $8, attack_id = $9, spattack_id = $10 WHERE id = $11 RETURNING *',
                     [updatedName, updatedAlignment, updatedType, updatedHealth, updatedExp, updatedChal, updatedDescrip, updatedStat, updatedAttack, updatedSpecial, id], (err, data) => {
 
                         if(err){
