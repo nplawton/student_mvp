@@ -17,7 +17,7 @@ app.use(cors());
 const pool = require('./dbConn');
 
 
-//Get Request for each Table. Currently Functioning: type
+//Get Request for each Table. Currently Functioning: type / descrip / 
 app.get('/type', (req, res, next) => {
     pool.query('SELECT * FROM type', (err, results) => {
         if(err){
@@ -58,7 +58,7 @@ app.get('/creature', (req, res, next) => {
                 c.attack_id, 
                 c.spattack_id 
                 FROM creature c
-                LEFT JOIN type t ON c.type_id = t.type_id,
+                LEFT JOIN type t ON c.type_id = t.type_id AND
                 LEFT JOIN descrip d ON c.descrip_id = d.descrip_id`, 
     (err, data) => {
         if(err){
