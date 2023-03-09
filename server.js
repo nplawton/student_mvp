@@ -125,7 +125,7 @@ app.get('/type/:id', (req, res, next) => {
         res.status(404).send(`There is no creature type with id ${id}`);
     }
 
-    pool.query(`SELECT id, t_name, t_description FROM type WHERE id = $1`, [id], (err, results) => {
+    pool.query(`SELECT type_id, t_name, t_description FROM type WHERE id = $1`, [id], (err, results) => {
         
         if(err){
             return next(err);
