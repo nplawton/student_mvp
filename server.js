@@ -99,31 +99,31 @@ app.get('/creature', (req, res, next) => {
 //     });
 // });
 
-// app.get('/type/:id', (req, res, next) => {
-//     const id = Number.parseInt(req.params.id);
-//     console.log(id);
+app.get('/type/:id', (req, res, next) => {
+    const id = Number.parseInt(req.params.id);
+    console.log(id);
 
-//     //If ID is not a number return error
-//     if(!Number.parseInt(id)){
-//         res.status(404).send(`There is no creature type with id ${id}`);
-//     }
+    //If ID is not a number return error
+    if(!Number.parseInt(id)){
+        res.status(404).send(`There is no creature type with id ${id}`);
+    }
 
-//     pool.query(`SELECT * FROM type WHERE id = $1`, [id], (err, results) => {
+    pool.query(`SELECT * FROM type WHERE id = $1`, [id], (err, results) => {
         
-//         if(err){
-//             return next(err);
-//         }
+        if(err){
+            return next(err);
+        }
 
-//         const type = results.rows[0];
-//         console.log('Creature type found', type);
+        const type = results.rows[0];
+        console.log('Creature type found', type);
 
-//         if(creature){
-//             return res.send(type);
-//         }else{
-//             return res.status(404).send('No creature type was found');
-//         }
-//     });
-// });
+        if(creature){
+            return res.send(type);
+        }else{
+            return res.status(404).send('No creature type was found');
+        }
+    });
+});
 
 
 // //Post new information Request for each Table. Currently Functioning:

@@ -42,7 +42,7 @@ setTimeout(() => {
                 console.log("Creatures Description table created sucessfully");
             }
         });
-}, 4000);
+}, 2000);
 
 setTimeout(() => {
     pool.query(`CREATE TABLE IF NOT EXISTS creature (
@@ -65,4 +65,4 @@ setTimeout(() => {
                 console.log("Creatures table created sucessfully");
             }
     });
-}, 6000);
+}, 4000);
