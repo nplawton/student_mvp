@@ -159,7 +159,8 @@ app.post('/creature', (req, res, next) => {
     const spattack_id = req.body.spattack_id;
 
     if(c_name && alignment_id && type_id && health && exp && chal && descrip_id && stat_id && attack_id && spattack_id){
-        pool.query(`INSERT INTO creature (c_name, alignment_id, type_id, health, exp, chal, descrip_id, stat_id, attack_id, spattack_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *`, 
+        pool.query(`INSERT INTO creature (c_name, alignment_id, type_id, health, exp, chal, descrip_id, stat_id, attack_id, spattack_id) 
+        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *`, 
         [c_name, alignment_id, type_id, health, exp, chal, descrip_id, stat_id, attack_id, spattack_id], (err, data) => {
             const newCreature = data.rows[0];
             console.log("Creature created", newCreature);
@@ -272,33 +273,33 @@ app.post('/creature', (req, res, next) => {
 
 
 // //Delete a creature
-// app.delete("/creature/:id", (req, res, next) => {
+app.delete("/creature/:id", (req, res, next) => {
     
-//     const id = Number.parseInt(req.params.id);
-//     console.log(id);
+    const id = req.params.id;
+    console.log(id);
 
-//     if(!Number.isInteger(id)){
-//         return res.status(404).send('No creature with that ID')
-//     }
+    if(!Number.isInteger(id)){
+        return res.status(404).send('No creature with that ID')
+    }
 
-//     pool.query('DELETE FROM creature WHERE id = $1 RETURNING *', [id], (err, results) => {
-//         if(err){
-//             return next(err);
-//         }
+    pool.query('DELETE FROM creature WHERE id = $1 RETURNING *', [id], (err, results) => {
+        if(err){
+            return next(err);
+        }
 
-//         const creature = results.rows[0];
-//         console.log(creature);
+        const creature = results.rows[0];
+        console.log(creature);
 
-//         if(creature){
-//             //respond with deleted row/creature
-//             res.send(creature);
-//         }else{
-//             res.status(404).send('No creature was found with that ID');
-//         }
+        if(creature){
+            //respond with deleted row/creature
+            res.send(creature);
+        }else{
+            res.status(404).send('No creature was found with that ID');
+        }
 
-//     });
+    });
 
-// });
+});
 
 //Port Listeaning
 app.listen(port, () => {
