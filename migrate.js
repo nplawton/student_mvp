@@ -2,7 +2,7 @@ const { Pool } = require('pg');
 
 const pool = require('./dbConn');
 
-pool.query(`DROP TABLE IF EXISTS type, creature`, (err, res) => {
+pool.query(`DROP TABLE IF EXISTS type, creature, descrip`, (err, res) => {
     if (err) {
       console.log('Error dropping tables:', err);
     } else {
