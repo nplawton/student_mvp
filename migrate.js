@@ -16,7 +16,7 @@ setTimeout(() => {
     pool.query(`CREATE TABLE IF NOT EXISTS type (
         type_id SERIAL PRIMARY KEY NOT NULL,
         t_name VARCHAR(200) NOT NULL,
-        description text NOT NULL)`, 
+        t_description text NOT NULL)`, 
         (err, type) => {
             if (err){
                 console.log("CREATE TABLE type failed");
@@ -28,6 +28,23 @@ setTimeout(() => {
 }, 2000);
 
 setTimeout(() => {
+    pool.query(`CREATE TABLE IF NOT EXISTS descrip(
+        descrip_id SERIAL PRIMARY KEY NOT NULL,
+        size VARCAHR(200),
+        speed text,
+        d_descrip text,
+        info text,
+        mon_img text)`, (err, descrip) => {
+            if (err){
+                console.log("CREATE TABLE creature description failed");
+                console.log(err);
+            }else{
+                console.log("Creatures Description table created sucessfully");
+            }
+        });
+}, 4000);
+
+setTimeout(() => {
     pool.query(`CREATE TABLE IF NOT EXISTS creature (
         id SERIAL PRIMARY KEY NOT NULL,
         c_name VARCHAR(200) NOT NULL,
@@ -36,7 +53,7 @@ setTimeout(() => {
         health INTEGER NOT NULL,
         exp INTEGER NOT NULL,
         chal INTEGER,
-        descrip_id INTEGER NOT NULL,
+        descrip_id INTEGER NOT NULL REFERENCES type (descrip_id),
         stat_id INTEGER NOT NULL,
         attack_id INTEGER NOT NULL,
         spattack_id INTEGER NOT NULL)`, 
@@ -48,4 +65,4 @@ setTimeout(() => {
                 console.log("Creatures table created sucessfully");
             }
     });
-}, 4000);
+}, 6000);
