@@ -63,7 +63,7 @@ pool.query(`INSERT INTO descrip (size, speed, d_descrip, info, mon_img) VALUES
                     console.log("Insert failed");
                     console.log(err);
                 }else{
-                    console.log(creature);
+                    console.log(descrip);
                 }
 });
 
