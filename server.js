@@ -47,6 +47,7 @@ app.get('/descrip', (req, res, next) => {
 app.get('/creature', (req, res, next) => {
 
     pool.query(`SELECT 
+        c.id,
         c.c_name, 
         c.alignment_id, 
         t.t_name, t.t_description, 

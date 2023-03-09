@@ -58,7 +58,7 @@ searchBtn.click((e) => {
 function searchReview(startTxt){
     let vault = dataReview(startTxt);
     $.get(vault, (data) => {
-        //console.log('This is where data is coming from', data);
+        console.log('This is where data is coming from', data);
         slideTrack.empty();
         slideActivate(data);
     });
@@ -66,7 +66,7 @@ function searchReview(startTxt){
 
 function dataReview(startTxt){
 
-    return `https://deploy-50pr.onrender.com/creature`;
+    return `https://test2-5wmp.onrender.com/creature`;
 
 }
 
@@ -157,18 +157,24 @@ function displayWindow(cardDisplay){
         <div id="display-box">
             <h1 id="dis-title">${cardDisplay.disTitle}</h1>
             <div id="stats">Creature Information
-                <p>STR:${cardDisplay.strength}/ DEX:${cardDisplay.dex}/ CON:${cardDisplay.cons}/ INT:${cardDisplay.intel}/ WIS:${cardDisplay.wis}/ CHA:${cardDisplay.charisma}</p>
-                <p>Armor Class:${cardDisplay.armor}/ Hit Points:${cardDisplay.health}/ Challenge:${cardDisplay.chal}</p>
+                <p>Hit Points:${cardDisplay.health}/ Challenge:${cardDisplay.chal} with (${cardDisplay.exp})xp</p>
             </div>
             <div id="grid">
-                <div id="attack">${cardDisplay.attack}</div>
                 <img id="${cardDisplay.id}" class="mon_img" src="${cardDisplay.disImg}"></img>
-                <div id="special">${cardDisplay.special}</div>
             </div>
             <p id="text">${cardDisplay.mon_des}</p>
+            <p id="text>${cardDisplay.info}</p>
         </div>
     `
 }
+
+/*
+    Lines deleted till more information is added
+    <p>STR:${cardDisplay.strength}/ DEX:${cardDisplay.dex}/ CON:${cardDisplay.cons}/ INT:${cardDisplay.intel}/ WIS:${cardDisplay.wis}/ CHA:${cardDisplay.charisma}</p>
+    Armor Class:${cardDisplay.armor}/ 
+    <div id="attack">${cardDisplay.attack}</div>
+    <div id="special">${cardDisplay.special}</div>
+*/
 
 // //Delete Element Test
 // deleteBtn.click((e) => {
@@ -181,23 +187,25 @@ function cardCreator(searchVault){
     return {
         id: searchVault.id,
         //Slide varibles
-        slideTitle: `<h1 id="${searchVault.id}" class="slide-title">${searchVault.name}</h1>`,
+        slideTitle: `<h1 id="${searchVault.id}" class="slide-title">${searchVault.c_name}</h1>`,
         slideImg: `<img id="${searchVault.id}" class="slide-img" src="${searchVault.mon_img}"></img>`,
         //Display window variables
-        disTitle: searchVault.name.toUpperCase(),
+        disTitle: searchVault.c_name.toUpperCase(),
         disImg: searchVault.mon_img,
-        armor: searchVault.armor,
+        //armor: searchVault.armor,
         health: searchVault.health,
-        strength: searchVault.stre,
-        dex: searchVault.dex,
-        cons: searchVault.cons,
-        intel: searchVault.intel,
-        wis: searchVault.wis,
-        charisma: searchVault.charisma,
+        //strength: searchVault.stre,
+        //dex: searchVault.dex,
+        //cons: searchVault.cons,
+        //intel: searchVault.intel,
+        //wis: searchVault.wis,
+        //charisma: searchVault.charisma,
         chal: searchVault.chal,
-        attack: searchVault.attack,
-        special: searchVault.special,
-        mon_des: searchVault.description, //[0].description
+        //attack: searchVault.attack,
+        //special: searchVault.special,
+        mon_des: searchVault.d_descrip, //[0].description
+        exp: searchVault.exp,
+        info: searchVault.info
     }
 }
 
