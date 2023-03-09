@@ -49,7 +49,7 @@ app.get('/creature', (req, res, next) => {
     pool.query(`SELECT 
                 c.c_name, 
                 c.alignment_id, 
-                t.t_name, t.description, 
+                t.t_name, t.t_description, 
                 c.health, c.exp, c.chal, 
                 d.size, d.speed,
                 d.d_descrip, d.info,
