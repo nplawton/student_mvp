@@ -53,7 +53,7 @@ app.get('/creature', (req, res, next) => {
                 c.health, c.exp, c.chal, 
                 d.size, d.speed,
                 d.d_descrip, d.info,
-                d.mon_img 
+                d.mon_img, 
                 c.stat_id, 
                 c.attack_id, 
                 c.spattack_id 
