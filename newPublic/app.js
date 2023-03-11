@@ -70,7 +70,7 @@ function searchReview(startTxt){
 
 function dataReview(startTxt){
 
-    return `https://test2-5wmp.onrender.com/creature?q=${startSearch}`;
+    return `https://test2-5wmp.onrender.com/creature`;
 
 }
 
