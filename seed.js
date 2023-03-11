@@ -20,12 +20,12 @@ pool.query(`INSERT INTO type (t_name, t_description) VALUES
         ('Monstrous Humanoid', 'A monstrous humanoid is similar to a humanoid, but usually has monstrous or animalistic features. Many also have supernatural abilities. Monstrous humanoids usually have darkvision.'),
         ('Goblinoid', 'Goblinoids had a typical humanoid anatomy, though their skin tone and texture was often somewhere between that of a human and a snail. The notable exception of this rule was the bugbears whose entire bodies were covered head to toe in thick fur.')
         ON CONFLICT (type_id) DO NOTHING`) 
-    .then((type) => {
-        console.log(type)
-    })
-    .catch((err) => {
-        console.log('Insert Type rows failed', err);
-    })
+.then((type) => {
+    console.log(type)
+})
+.catch((err) => {
+    console.log('Insert Type rows failed', err);
+})
 .then(pool.query(`INSERT INTO descrip (size, speed, d_descrip, info, mon_img) VALUES
         ('Medium', 'On Ground 20ft, Flying 50ft', 'Aarakocra are bird-like humanoids with feathers and a beak. Their hands have three fingers and a thumb, and they also have a pair of feathered wings. Aarakocra have lean legs ending in talons. Aarakocra look like large birds from below, until they land. Aarakocra have advantage on saving throws against lightning and thunder damage, as well as against spells or powers that manipulate air, such as gust of wind, wind wall, or an air elementals whirlwind power. Aarakocra have lean, lightweight bodies, typically 80 to 100 pounds. Their skeletons are hollow and fragile. Their wings anchor in a bony chest plate that provides some slight natural protection.', 'Aarakocra range the Howling Gyre, an endless storm of mighty winds and lashing rains that surrounds the tranquil realm of Aaqa in the Elemental Plane of Air. Making aerial patrols, these birdlike humanoids guard the windy borders of their home against invaders from the Elemental Plane of Earth, such as gargoyles, their sworn enemies.', 'https://www.dndbeyond.com/avatars/thumbnails/7/622/420/618/636286750209394240.png'),
         ('Large', 'On Ground 10ft, Swim 40ft', 'Aboleth underbellies were often orange-pink, while their topsides were typically sea-green. A little bit back from the head were four long tentacles, two sprouting from across each other on the top, and two more of the same on the underbelly. Their heads were roughly triangular-shaped, with a spherical, somewhat beak-like nose. Above the nose were their three eyes, each one set atop the other. Tendrils and a few shorter tentacles dangled from the bottom of the head. Four blue-black slime-secreting orifices lined the bottom of their bodies. Aboleth blood was green and thick, oozing like sap.', 'The aboleth can take 3 legendary actions, choosing from the options below (Special Attacks). Only one legendary action option can be used at a time and only at th e end of another creatures turn.', 'https://www.dndbeyond.com/avatars/thumbnails/30761/774/1000/1000/638061093283829548.png'),
@@ -56,12 +56,12 @@ pool.query(`INSERT INTO type (t_name, t_description) VALUES
         ('Large', 'On Ground 30ft, Flying 90ft', 'Planetars are muscular and hairless and have opalescent green skin and white-feathered wings. They tower over most humanoids, brandishing immense swords with grace.', 'Planetars act as the weapons of the gods they serve, presenting a tangible representation of their deities might. A planetar can call down rain to relieve a drought, or can loose an insect plague to devour crops. A planetars celestial ears detect every falsehood, and its radiant eyes see through every deception.', 'https://www.dndbeyond.com/avatars/thumbnails/30761/799/1000/1000/638061094132481081.png'),
         ('Large', 'On Ground 50ft, Flying 150ft', 'The Solar resembles a towering, powerfully built human with brilliant topaz eyes, silvery (or golden) skin, and gleaming white wings.', 'A solar is godlike in its glory and power. On the battlefield, the solars sword flies into the fray on its own, and a single arrow from a solars bow can strike a target dead on contact. So great is a solars celestial might that even demon princes shrink at its resonant commands.', 'https://www.dndbeyond.com/avatars/thumbnails/30761/809/1000/1000/638061094428241214.png')
         ON CONFLICT (descrip_id) DO NOTHING`))
-    .then((descrip) => {
-        console.log(descrip);
-    })
-    .catch((err) => {
-        console.log('Insert Descrip rows failed', err);
-    })
+.then((descrip) => {
+    console.log(descrip);
+})
+.catch((err) => {
+    console.log('Insert Descrip rows failed', err);
+})
 .then(pool.query(`INSERT INTO creature (mon_name, alignment_id, type_id, health, exp, chal, descrip_id, stat_id, attack_id, spattack_id) VALUES
         ('Aarakocra', 1, 16, 13, 50, 0, 1, 1, 1, 1),
         ('Aboleth', 2, 1, 135, 5900, 10, 2, 2, 2, 2),
@@ -92,9 +92,9 @@ pool.query(`INSERT INTO type (t_name, t_description) VALUES
         ('Planetar', 2, 3, 200, 15000, 16, 27, 27, 27, 27),
         ('Solar', 2, 3, 243, 33000, 21, 28, 28, 28, 28)
         ON CONFLICT (id) DO NOTHING`))
-    .then((creature) => {
-        console.log(creature);
-    })
-    .catch((err) => {
-        console.log('Insert Creature rows failed', err);
-    })
+.then((creature) => {
+    console.log(creature);
+})
+.catch((err) => {
+    console.log('Insert Creature rows failed', err);
+})
