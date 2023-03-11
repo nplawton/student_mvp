@@ -32,19 +32,6 @@ pool.query(`DROP TABLE IF EXISTS type, creature, descrip`)
     .catch((err) => {
         console.log('CREATE TABLE descrip failed', err);
     })
-.then(pool.query(`CREATE TABLE IF NOT EXISTS descrip (
-    descrip_id SERIAL PRIMARY KEY NOT NULL,
-    size text,
-    speed text,
-    d_descrip text,
-    info text,
-    mon_img text)`))
-    .then((data) => {
-        console.log("Creatures Description table created sucessfully");
-    })
-    .catch((err) => {
-        console.log('CREATE TABLE creature description failed', err);
-    })
 .then(pool.query(`CREATE TABLE IF NOT EXISTS creature (
     id SERIAL PRIMARY KEY NOT NULL,
     mon_name VARCHAR(200) NOT NULL,
