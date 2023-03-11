@@ -57,8 +57,8 @@ pool.query(`INSERT INTO type (t_name, t_description) VALUES
         ('Large', 'On Ground 30ft, Flying 90ft', 'Planetars are muscular and hairless and have opalescent green skin and white-feathered wings. They tower over most humanoids, brandishing immense swords with grace.', 'Planetars act as the weapons of the gods they serve, presenting a tangible representation of their deities might. A planetar can call down rain to relieve a drought, or can loose an insect plague to devour crops. A planetars celestial ears detect every falsehood, and its radiant eyes see through every deception.', 'https://www.dndbeyond.com/avatars/thumbnails/30761/799/1000/1000/638061094132481081.png'),
         ('Large', 'On Ground 50ft, Flying 150ft', 'The Solar resembles a towering, powerfully built human with brilliant topaz eyes, silvery (or golden) skin, and gleaming white wings.', 'A solar is godlike in its glory and power. On the battlefield, the solars sword flies into the fray on its own, and a single arrow from a solars bow can strike a target dead on contact. So great is a solars celestial might that even demon princes shrink at its resonant commands.', 'https://www.dndbeyond.com/avatars/thumbnails/30761/809/1000/1000/638061094428241214.png')
         ON CONFLICT (descrip_id) DO NOTHING`))
-    .then((descrip) => {
-        console.log(descrip);
+    .then((data) => {
+        console.log(data);
     })
     .catch((err) => {
         console.log('Insert Descrip rows failed', err);
