@@ -20,8 +20,8 @@ pool.query(`INSERT INTO type (t_name, t_description) VALUES
         ('Monstrous Humanoid', 'A monstrous humanoid is similar to a humanoid, but usually has monstrous or animalistic features. Many also have supernatural abilities. Monstrous humanoids usually have darkvision.'),
         ('Goblinoid', 'Goblinoids had a typical humanoid anatomy, though their skin tone and texture was often somewhere between that of a human and a snail. The notable exception of this rule was the bugbears whose entire bodies were covered head to toe in thick fur.')
         ON CONFLICT (type_id) DO NOTHING`) 
-.then((type) => {
-    console.log(type)
+.then((data) => {
+    console.log(data)
 })
 .catch((err) => {
     console.log('Insert Type rows failed', err);
