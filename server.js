@@ -59,7 +59,7 @@ app.get('/creatures', (req, res, next) => {
 app.get('/creature', (req, res, next) => {
     pool.query(`SELECT 
         c.id,
-        c.c_name, 
+        c.mon_name, 
         c.alignment_id, 
         t.t_name, t.t_description, 
         c.health, c.exp, c.chal, 
@@ -97,7 +97,7 @@ app.get('/creature/:id', (req, res, next) => {
     }
 
     pool.query(`SELECT id, 
-            c.c_name, 
+            c.mon_name, 
             c.alignment_id, 
             t.t_name, t.t_description, 
             c.health, c.exp, c.chal, 
@@ -129,7 +129,7 @@ app.get('/creature/:id', (req, res, next) => {
 });
 
 // const getAll = pool.query(`SELECT id, 
-//         c.c_name, 
+//         c.mon_name, 
 //         c.alignment_id, 
 //         t.t_name, t.t_description, 
 //         c.health, c.exp, c.chal, 
@@ -189,7 +189,7 @@ app.get('/creature/:id', (req, res, next) => {
 //Post new information Request for each Table. Currently Functioning:
 app.post('/creature', (req, res, next) => {
 
-    const c_name = req.body.c_name;
+    const mon_name = req.body.mon_name;
     const alignment_id = req.body.alignment_id;
     const type_id = req.body.type_id;
     const health = req.body.health;
@@ -200,10 +200,10 @@ app.post('/creature', (req, res, next) => {
     const attack_id = req.body.stat_id;
     const spattack_id = req.body.spattack_id;
 
-    if(c_name && alignment_id && type_id && health && exp && chal && descrip_id && stat_id && attack_id && spattack_id){
-        pool.query(`INSERT INTO creature (c_name, alignment_id, type_id, health, exp, chal, descrip_id, stat_id, attack_id, spattack_id) 
+    if(mon_name && alignment_id && type_id && health && exp && chal && descrip_id && stat_id && attack_id && spattack_id){
+        pool.query(`INSERT INTO creature (mon_name, alignment_id, type_id, health, exp, chal, descrip_id, stat_id, attack_id, spattack_id) 
         VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *`, 
-        [c_name, alignment_id, type_id, health, exp, chal, descrip_id, stat_id, attack_id, spattack_id], (err, data) => {
+        [mon_name, alignment_id, type_id, health, exp, chal, descrip_id, stat_id, attack_id, spattack_id], (err, data) => {
             const newCreature = data.rows[0];
             console.log("Creature created", newCreature);
 
@@ -251,7 +251,7 @@ app.patch('/creature/:id', (req, res, next) => {
     //console.log(id);
 
     //get the change/update information from the request body
-    const c_name = req.body.c_name;
+    const mon_name = req.body.mon_name;
     const alignment_id = req.body.alignment_id;
     const type_id = req.body.type_id;
     const health = req.body.health;
@@ -284,7 +284,7 @@ app.patch('/creature/:id', (req, res, next) => {
         }else{
 
             //List all columns in the database table there is not limit to the $s
-            const updatedName = c_name || creature.c_name;
+            const updatedName = mon_name || creature.mon_name;
             const updatedAlignment = alignment_id || creature.alignment_id;
             const updatedType = type_id || creature.type_id;
             const updatedHealth = health || creature.health;
@@ -295,7 +295,7 @@ app.patch('/creature/:id', (req, res, next) => {
             const updatedAttack = attack_id || creature.attack_id;
             const updatedSpecial = spattack_id || creature.spattack_id;
 
-            pool.query('UPDATE creature SET c_name = $1, alignment_id = $2, type_id = $3, health = $4, exp = $5, chal = $6, descrip_id = $7, stat_id = $8, attack_id = $9, spattack_id = $10 WHERE id = $11 RETURNING *',
+            pool.query('UPDATE creature SET mon_name = $1, alignment_id = $2, type_id = $3, health = $4, exp = $5, chal = $6, descrip_id = $7, stat_id = $8, attack_id = $9, spattack_id = $10 WHERE id = $11 RETURNING *',
                     [updatedName, updatedAlignment, updatedType, updatedHealth, updatedExp, updatedChal, updatedDescrip, updatedStat, updatedAttack, updatedSpecial, id], (err, data) => {
 
                         if(err){
