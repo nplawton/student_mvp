@@ -9,6 +9,16 @@ pool.query(`DROP TABLE IF EXISTS type, creature, descrip`)
 .catch((err) => {
     console.log('Error dropping tables:', err);
 })
+.then(pool.query(`CREATE TABLE IF NOT EXISTS type (
+    type_id SERIAL PRIMARY KEY NOT NULL,
+    t_name VARCHAR(200) NOT NULL,
+    t_description text NOT NULL)`))
+    .then((data) => {
+        console.log("Creature Type table created sucessfully");
+    })
+    .catch((err) => {
+        console.log('CREATE TABLE type failed', err);
+    })
 .then(pool.query(`CREATE TABLE IF NOT EXISTS descrip (
         descrip_id SERIAL PRIMARY KEY NOT NULL,
         size text,
@@ -17,10 +27,10 @@ pool.query(`DROP TABLE IF EXISTS type, creature, descrip`)
         info text,
         mon_img text)`))
     .then((data) => {
-        console.log("Type table created sucessfully");
+        console.log("Creature Descrip table created sucessfully");
     })
     .catch((err) => {
-        console.log('CREATE TABLE type failed', err);
+        console.log('CREATE TABLE descrip failed', err);
     })
 .then(pool.query(`CREATE TABLE IF NOT EXISTS descrip (
     descrip_id SERIAL PRIMARY KEY NOT NULL,
@@ -64,7 +74,7 @@ pool.query(`DROP TABLE IF EXISTS type, creature, descrip`)
 // });
 
 
-//foreign keys go last
+// foreign keys go last
 // setTimeout(() => {
 //     pool.query(`CREATE TABLE IF NOT EXISTS type (
 //         type_id SERIAL PRIMARY KEY NOT NULL,
