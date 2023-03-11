@@ -9,7 +9,7 @@ pool.query(`DROP TABLE IF EXISTS type, descrip, creature`)
 .catch((err) => {
     console.log('Error dropping tables:', err);
 })
-.then(pool.query(`CREATE TABLE IF NOT EXISTS type (
+.then(pool.query(`CREATE TABLE type (
     type_id SERIAL PRIMARY KEY NOT NULL,
     t_name VARCHAR(200) NOT NULL,
     t_description text NOT NULL)`))

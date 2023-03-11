@@ -1,4 +1,5 @@
 const { Pool } = require('pg');
+
 const pool = require('./dbConn');
 
 pool.query(`INSERT INTO type (t_name, t_description) VALUES 
