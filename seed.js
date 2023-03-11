@@ -56,12 +56,12 @@ pool.query(`INSERT INTO type (t_name, t_description) VALUES
         ('Large', 'On Ground 30ft, Flying 90ft', 'Planetars are muscular and hairless and have opalescent green skin and white-feathered wings. They tower over most humanoids, brandishing immense swords with grace.', 'Planetars act as the weapons of the gods they serve, presenting a tangible representation of their deities might. A planetar can call down rain to relieve a drought, or can loose an insect plague to devour crops. A planetars celestial ears detect every falsehood, and its radiant eyes see through every deception.', 'https://www.dndbeyond.com/avatars/thumbnails/30761/799/1000/1000/638061094132481081.png'),
         ('Large', 'On Ground 50ft, Flying 150ft', 'The Solar resembles a towering, powerfully built human with brilliant topaz eyes, silvery (or golden) skin, and gleaming white wings.', 'A solar is godlike in its glory and power. On the battlefield, the solars sword flies into the fray on its own, and a single arrow from a solars bow can strike a target dead on contact. So great is a solars celestial might that even demon princes shrink at its resonant commands.', 'https://www.dndbeyond.com/avatars/thumbnails/30761/809/1000/1000/638061094428241214.png')
         ON CONFLICT (descrip_id) DO NOTHING`))
-.then((descrip) => {
-    console.log(descrip);
-})
-.catch((err) => {
-    console.log('Insert Descrip rows failed', err);
-})
+    .then((descrip) => {
+        console.log(descrip);
+    })
+    .catch((err) => {
+        console.log('Insert Descrip rows failed', err);
+    })
 .then(pool.query(`INSERT INTO creature (mon_name, alignment_id, type_id, health, exp, chal, descrip_id, stat_id, attack_id, spattack_id) VALUES
         ('Aarakocra', 1, 16, 13, 50, 0, 1, 1, 1, 1),
         ('Aboleth', 2, 1, 135, 5900, 10, 2, 2, 2, 2),
@@ -92,9 +92,9 @@ pool.query(`INSERT INTO type (t_name, t_description) VALUES
         ('Planetar', 2, 3, 200, 15000, 16, 27, 27, 27, 27),
         ('Solar', 2, 3, 243, 33000, 21, 28, 28, 28, 28)
         ON CONFLICT (id) DO NOTHING`))
-.then((creature) => {
-    console.log(creature);
-})
-.catch((err) => {
-    console.log('Insert Creature rows failed', err);
-})
+    .then((creature) => {
+        console.log(creature);
+    })
+    .catch((err) => {
+        console.log('Insert Creature rows failed', err);
+    })
