@@ -15,7 +15,6 @@ pool.query(`DROP TABLE IF EXISTS type, descrip, creature`)
     t_description text NOT NULL)`))
     .then((data) => {
         console.log('Creature Type table created sucessfully');
-        console.log(data);
     })
     .catch((err) => {
         console.log('CREATE TABLE type failed', err);
@@ -29,7 +28,6 @@ pool.query(`DROP TABLE IF EXISTS type, descrip, creature`)
         mon_img text)`))
     .then((data) => {
         console.log('Creature Descrip table created sucessfully');
-        console.log(data);
     })
     .catch((err) => {
         console.log('CREATE TABLE descrip failed', err);
