@@ -3,22 +3,22 @@ const { Pool } = require('pg');
 const pool = require('./dbConn');
 
 pool.query(`DROP TABLE IF EXISTS type, descrip, creature`)
-.then((data) => {
-    console.log('Tables dropped!');
-})
-.catch((err) => {
-    console.log('Error dropping tables:', err);
-})
-.then(pool.query(`CREATE TABLE type (
+    .then((data) => {
+        console.log('Tables dropped!');
+    })
+    .catch((err) => {
+        console.log('Error dropping tables:', err);
+    })
+.then(pool.query(`CREATE TABLE IF NOT EXISTS type (
     type_id SERIAL PRIMARY KEY NOT NULL,
     t_name VARCHAR(200) NOT NULL,
     t_description text NOT NULL)`))
-.then((data) => {
-    console.log("Creature Type table created sucessfully");
-})
-.catch((err) => {
-    console.log('CREATE TABLE type failed', err);
-})
+    .then((data) => {
+        console.log("Creature Type table created sucessfully");
+    })
+    .catch((err) => {
+        console.log('CREATE TABLE type failed', err);
+    })
 // .then(pool.query(`CREATE TABLE IF NOT EXISTS descrip (
 //         descrip_id SERIAL PRIMARY KEY NOT NULL,
 //         size text,

@@ -21,12 +21,12 @@ pool.query(`INSERT INTO type (t_name, t_description) VALUES
         ('Monstrous Humanoid', 'A monstrous humanoid is similar to a humanoid, but usually has monstrous or animalistic features. Many also have supernatural abilities. Monstrous humanoids usually have darkvision.'),
         ('Goblinoid', 'Goblinoids had a typical humanoid anatomy, though their skin tone and texture was often somewhere between that of a human and a snail. The notable exception of this rule was the bugbears whose entire bodies were covered head to toe in thick fur.')
         ON CONFLICT (type_id) DO NOTHING`) 
-.then((data) => {
-    console.log(data)
-})
-.catch((err) => {
-    console.log('Insert Type rows failed', err);
-})
+    .then((data) => {
+        console.log(data)
+    })
+    .catch((err) => {
+        console.log('Insert Type rows failed', err);
+    })
 // .then(pool.query(`INSERT INTO descrip (size, speed, d_descrip, info, mon_img) VALUES
 //         ('Medium', 'On Ground 20ft, Flying 50ft', 'Aarakocra are bird-like humanoids with feathers and a beak. Their hands have three fingers and a thumb, and they also have a pair of feathered wings. Aarakocra have lean legs ending in talons. Aarakocra look like large birds from below, until they land. Aarakocra have advantage on saving throws against lightning and thunder damage, as well as against spells or powers that manipulate air, such as gust of wind, wind wall, or an air elementals whirlwind power. Aarakocra have lean, lightweight bodies, typically 80 to 100 pounds. Their skeletons are hollow and fragile. Their wings anchor in a bony chest plate that provides some slight natural protection.', 'Aarakocra range the Howling Gyre, an endless storm of mighty winds and lashing rains that surrounds the tranquil realm of Aaqa in the Elemental Plane of Air. Making aerial patrols, these birdlike humanoids guard the windy borders of their home against invaders from the Elemental Plane of Earth, such as gargoyles, their sworn enemies.', 'https://www.dndbeyond.com/avatars/thumbnails/7/622/420/618/636286750209394240.png'),
 //         ('Large', 'On Ground 10ft, Swim 40ft', 'Aboleth underbellies were often orange-pink, while their topsides were typically sea-green. A little bit back from the head were four long tentacles, two sprouting from across each other on the top, and two more of the same on the underbelly. Their heads were roughly triangular-shaped, with a spherical, somewhat beak-like nose. Above the nose were their three eyes, each one set atop the other. Tendrils and a few shorter tentacles dangled from the bottom of the head. Four blue-black slime-secreting orifices lined the bottom of their bodies. Aboleth blood was green and thick, oozing like sap.', 'The aboleth can take 3 legendary actions, choosing from the options below (Special Attacks). Only one legendary action option can be used at a time and only at th e end of another creatures turn.', 'https://www.dndbeyond.com/avatars/thumbnails/30761/774/1000/1000/638061093283829548.png'),
