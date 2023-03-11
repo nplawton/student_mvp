@@ -13,12 +13,12 @@ pool.query(`DROP TABLE IF EXISTS type, descrip, creature`)
     type_id SERIAL PRIMARY KEY NOT NULL,
     t_name VARCHAR(200) NOT NULL,
     t_description text NOT NULL)`))
-    .then((data) => {
-        console.log("Creature Type table created sucessfully");
-    })
-    .catch((err) => {
-        console.log('CREATE TABLE type failed', err);
-    })
+.then((data) => {
+    console.log("Creature Type table created sucessfully");
+})
+.catch((err) => {
+    console.log('CREATE TABLE type failed', err);
+})
 .then(pool.query(`CREATE TABLE IF NOT EXISTS descrip (
         descrip_id SERIAL PRIMARY KEY NOT NULL,
         size text,
@@ -26,12 +26,12 @@ pool.query(`DROP TABLE IF EXISTS type, descrip, creature`)
         d_descrip text,
         info text,
         mon_img text)`))
-    .then((data) => {
-        console.log("Creature Descrip table created sucessfully");
-    })
-    .catch((err) => {
-        console.log('CREATE TABLE descrip failed', err);
-    })
+.then((data) => {
+    console.log("Creature Descrip table created sucessfully");
+})
+.catch((err) => {
+    console.log('CREATE TABLE descrip failed', err);
+})
 .then(pool.query(`CREATE TABLE IF NOT EXISTS creature (
     id SERIAL PRIMARY KEY NOT NULL,
     mon_name VARCHAR(200) NOT NULL,
@@ -44,9 +44,9 @@ pool.query(`DROP TABLE IF EXISTS type, descrip, creature`)
     stat_id INTEGER NOT NULL,
     attack_id INTEGER NOT NULL,
     spattack_id INTEGER NOT NULL)`))
-    .then((data) => {
-        console.log('Creatures table created sucessfully');
-    })
-    .catch((err) => {
-        console.log('CREATE TABLE creature failed', err);
-    })
+.then((data) => {
+    console.log('Creatures table created sucessfully');
+})
+.catch((err) => {
+    console.log('CREATE TABLE creature failed', err);
+})
