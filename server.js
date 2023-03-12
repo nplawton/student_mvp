@@ -145,7 +145,7 @@ app.get('/type/:id', (req, res, next) => {
         const type = results.rows[0];
         console.log('Creature type found', type);
 
-        if(creature){
+        if(type){
             return res.send(type);
         }else{
             return res.status(404).send('No creature type was found');
