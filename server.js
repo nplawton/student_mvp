@@ -17,7 +17,7 @@ app.use(cors());
 const pool = require('./dbConn');
 
 
-//Get Request for each Table. Currently Functioning: type / descrip / 
+//Get Request for each Table. Currently Functioning: type / descrip / creature (joined) / creatures (creature db unjoined)
 app.get('/type', (req, res, next) => {
     pool.query('SELECT * FROM type', (err, results) => {
         if(err){
@@ -30,7 +30,6 @@ app.get('/type', (req, res, next) => {
     });
 });
 
-//Get Request for each Table. Currently Functioning: type
 app.get('/descrip', (req, res, next) => {
     pool.query('SELECT * FROM descrip', (err, results) => {
         if(err){
@@ -86,7 +85,7 @@ app.get('/creature', (req, res, next) => {
 });
 
 
-//Single Get Request for each Table. Currently Functioning:
+//Single Get Request for each Table. Currently Functioning: cretures (joined) /
 app.get('/creature/:id', (req, res, next) => {
     const id = req.params.id;
     console.log(id);
@@ -128,62 +127,31 @@ app.get('/creature/:id', (req, res, next) => {
                 });
 });
 
-// const getAll = pool.query(`SELECT id, 
-//         c.mon_name, 
-//         c.alignment_id, 
-//         t.t_name, t.t_description, 
-//         c.health, c.exp, c.chal, 
-//         d.size, d.speed,
-//         d.d_descrip, d.info,
-//         d.mon_img, 
-//         c.stat_id, 
-//         c.attack_id, 
-//         c.spattack_id 
-//         FROM creature c
-//         LEFT JOIN type t ON c.type_id = t.type_id
-//         LEFT JOIN descrip d ON c.descrip_id = d.descrip_id 
-//         WHERE id = $1`, 
-//     (err, results) => {
+app.get('/type/:id', (req, res, next) => {
+    const id = req.params.id;
+    console.log(id);
+
+    //If ID is not a number return error
+    if(!Number.parseInt(id)){
+        res.status(404).send(`There is no creature type with id ${id}`);
+    }
+
+    pool.query(`SELECT type_id, t_name, t_description FROM type WHERE id = $1`, [id], (err, results) => {
         
-//         if(err){
-//             return next(err);
-//         }
+        if(err){
+            return next(err);
+        }
 
-//         const creature = results.rows[0];
-//         console.log('Single Creature found', creature);
+        const type = results.rows[0];
+        console.log('Creature type found', type);
 
-//         if(creature){
-//             return res.send(creature);
-//         }else{
-//             return res.status(404).send('No creature was found');
-//         }
-//     });
-
-// app.get('/type/:id', (req, res, next) => {
-//     const id = req.params.id;
-//     console.log(id);
-
-//     //If ID is not a number return error
-//     if(!Number.parseInt(id)){
-//         res.status(404).send(`There is no creature type with id ${id}`);
-//     }
-
-//     pool.query(`SELECT type_id, t_name, t_description FROM type WHERE id = $1`, [id], (err, results) => {
-        
-//         if(err){
-//             return next(err);
-//         }
-
-//         const type = results.rows[0];
-//         console.log('Creature type found', type);
-
-//         if(creature){
-//             return res.send(type);
-//         }else{
-//             return res.status(404).send('No creature type was found');
-//         }
-//     });
-// });
+        if(creature){
+            return res.send(type);
+        }else{
+            return res.status(404).send('No creature type was found');
+        }
+    });
+});
 
 
 //Post new information Request for each Table. Currently Functioning:
