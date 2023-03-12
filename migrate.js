@@ -13,16 +13,16 @@ pool.query(`DROP TABLE IF EXISTS type, descrip, creature`)
     .catch((error) => {
         console.log('Error dropping tables:', error);
     })
-    .then((data) => {
-        console.log('Creature Type table created sucessfully');
-        return pool.query(`CREATE TABLE IF NOT EXISTS descrip (
-            descrip_id SERIAL PRIMARY KEY NOT NULL,
-            size text,
-            speed text,
-            d_descrip text,
-            info text,
-            mon_img text)`);
-    })
+.then((data) => {
+    console.log('Creature Type table created sucessfully');
+    return pool.query(`CREATE TABLE IF NOT EXISTS descrip (
+        descrip_id SERIAL PRIMARY KEY NOT NULL,
+        size text,
+        speed text,
+        d_descrip text,
+        info text,
+        mon_img text)`);
+})
     .catch((error) => {
         console.log('CREATE TABLE type failed', error);
     })
