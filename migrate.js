@@ -6,8 +6,8 @@ pool.query(`DROP TABLE IF EXISTS type, descrip, creature`)
     .then((data) => {
         console.log('Tables dropped!');
     })
-    .catch((err) => {
-        console.log('Error dropping tables:', err);
+    .catch((error) => {
+        console.log('Error dropping tables:', error);
     })
 .then(pool.query(`CREATE TABLE IF NOT EXISTS type (
     type_id SERIAL PRIMARY KEY NOT NULL,
@@ -16,8 +16,8 @@ pool.query(`DROP TABLE IF EXISTS type, descrip, creature`)
     .then((data) => {
         console.log('Creature Type table created sucessfully');
     })
-    .catch((err) => {
-        console.log('CREATE TABLE type failed', err);
+    .catch((error) => {
+        console.log('CREATE TABLE type failed', error);
     })
 .then(pool.query(`CREATE TABLE IF NOT EXISTS descrip (
         descrip_id SERIAL PRIMARY KEY NOT NULL,
@@ -29,8 +29,8 @@ pool.query(`DROP TABLE IF EXISTS type, descrip, creature`)
     .then((data) => {
         console.log('Creature Descrip table created sucessfully');
     })
-    .catch((err) => {
-        console.log('CREATE TABLE descrip failed', err);
+    .catch((error) => {
+        console.log('CREATE TABLE descrip failed', error);
     })
 // .then(pool.query(`CREATE TABLE IF NOT EXISTS creature (
 //     id SERIAL PRIMARY KEY NOT NULL,
