@@ -85,7 +85,7 @@ app.get('/creature', (req, res, next) => {
 });
 
 
-//Single Get Request for each Table. Currently Functioning: cretures (joined) /
+//Single Get Request for each Table. Currently Functioning: creture (joined) /
 app.get('/creature/:id', (req, res, next) => {
     const id = req.params.id;
     console.log(id);
@@ -136,7 +136,7 @@ app.get('/type/:id', (req, res, next) => {
         res.status(404).send(`There is no creature type with id ${id}`);
     }
 
-    pool.query(`SELECT type_id, t_name, t_description FROM type WHERE id = $1`, [id], (err, data) => {
+    pool.query(`SELECT * FROM type WHERE id = $1`, [id], (err, data) => {
         
         if(err){
             return next(err);
